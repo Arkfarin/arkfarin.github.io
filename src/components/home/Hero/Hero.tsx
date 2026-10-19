@@ -20,10 +20,12 @@ export function Hero() {
         )}
       </div>
       <div className={styles['hero-wordmark']}>
-        <div className={styles['red-band']} aria-hidden="true"></div>
-        <h1 id="hero-title">ARKFARIN</h1>
+        <div className={styles['red-band']} data-hero-band aria-hidden="true" />
+        <h1 id="hero-title">
+          <span data-hero-word>ARKFARIN</span>
+        </h1>
       </div>
-      <div className={styles['hero-intro']}>
+      <div className={styles['hero-intro']} data-hero-intro>
         <h2>
           {t('heroCode')}
           <br />

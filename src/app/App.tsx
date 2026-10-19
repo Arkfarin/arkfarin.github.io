@@ -11,6 +11,7 @@ export function App() {
   return (
     <>
       <Header />
+      <div className={styles.routeProgress} aria-hidden="true" />
       {error && (
         <div className={styles.error} role="alert">
           <span>
@@ -25,7 +26,9 @@ export function App() {
           </button>
         </div>
       )}
-      <Outlet />
+      <div className={styles.page} data-route-content>
+        <Outlet />
+      </div>
     </>
   );
 }

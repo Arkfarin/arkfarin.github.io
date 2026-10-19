@@ -1,13 +1,25 @@
 import { useI18n } from '@/hooks/useI18n';
-import { lazy, Suspense, useEffect, type ReactNode } from 'react';
-import { Route, Routes } from 'react-router';
+import {
+  lazy,
+  Suspense,
+  useCallback,
+  useLayoutEffect,
+  type ReactNode,
+} from 'react';
+import { matchPath, Route, Routes, useLocation } from 'react-router';
 import { App } from './App';
 import { Home } from '@/pages/Home/Home';
 import { Projects } from '@/pages/Projects/Projects';
 import { NotFound } from '@/pages/NotFound/NotFound';
 import { PageBoundary } from '@/components/ui/PageBoundary/PageBoundary';
+import { usePageTransition } from '@/hooks/usePageTransition';
+import { useSiteData } from '@/data/site';
+import { loadMarkdown } from '@/data/projects';
 import styles from './App.module.css';
-const Project = lazy(() => import('@/pages/Project/Project'));
+const importProject = () => import('@/pages/Project/Project');
+let projectModule: ReturnType<typeof importProject> | undefined;
+const loadProject = () => (projectModule ??= importProject());
+const Project = lazy(loadProject);
 function Ready({
   children,
   onReady,
@@ -15,20 +27,37 @@ function Ready({
   children: ReactNode;
   onReady?: () => void;
 }) {
-  useEffect(() => {
+  const { key } = useLocation();
+  useLayoutEffect(() => {
     onReady?.();
-  }, [onReady]);
+  }, [onReady, key]);
   return children;
 }
 export function SiteRoutes({ onReady }: { onReady?: () => void }) {
   const { t } = useI18n();
+  const { data } = useSiteData();
+  const prepare = useCallback(
+    async (pathname: string) => {
+      const match = matchPath('/projects/:slug', pathname);
+      if (!match) return;
+      const project = data.projects.find(
+        ({ slug }) => slug === match.params.slug,
+      );
+      await Promise.allSettled([
+        loadProject(),
+        ...(project ? [loadMarkdown(project)] : []),
+      ]);
+    },
+    [data.projects],
+  );
+  const { location, onReady: pageReady } = usePageTransition(prepare, onReady);
   return (
-    <Routes>
+    <Routes location={location}>
       <Route element={<App />}>
         <Route
           index
           element={
-            <Ready onReady={onReady}>
+            <Ready onReady={pageReady}>
               <Home />
             </Ready>
           }
@@ -36,7 +65,7 @@ export function SiteRoutes({ onReady }: { onReady?: () => void }) {
         <Route
           path="projects"
           element={
-            <Ready onReady={onReady}>
+            <Ready onReady={pageReady}>
               <Projects />
             </Ready>
           }
@@ -44,7 +73,7 @@ export function SiteRoutes({ onReady }: { onReady?: () => void }) {
         <Route
           path="projects/:slug"
           element={
-            <PageBoundary onReady={onReady}>
+            <PageBoundary key={location.pathname} onReady={pageReady}>
               <Suspense
                 fallback={
                   <main
@@ -56,7 +85,7 @@ export function SiteRoutes({ onReady }: { onReady?: () => void }) {
                   </main>
                 }
               >
-                <Ready onReady={onReady}>
+                <Ready onReady={pageReady}>
                   <Project />
                 </Ready>
               </Suspense>
@@ -66,7 +95,7 @@ export function SiteRoutes({ onReady }: { onReady?: () => void }) {
         <Route
           path="*"
           element={
-            <Ready onReady={onReady}>
+            <Ready onReady={pageReady}>
               <NotFound />
             </Ready>
           }

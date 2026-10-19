@@ -7,6 +7,12 @@ html[data-loading] {
 html[data-loading] #root {
   visibility: hidden;
 }
+html[data-loading='revealing'] #root {
+  visibility: visible;
+}
+[data-preloader-target] {
+  visibility: hidden;
+}
 html[data-loading] .preloader {
   position: fixed;
   inset: 0;
@@ -20,43 +26,23 @@ html[data-theme='dark'] .preloader {
 }
 .preloader-word {
   position: relative;
-  display: flex;
-  font-family: Display, Impact, sans-serif;
+  display: block;
+  width: max-content;
+  font-family: Display, Impact, 'Arial Narrow', sans-serif;
   font-weight: 800;
   font-size: clamp(64px, 16vw, 240px);
-  line-height: 1.1;
-  letter-spacing: -0.025em;
+  line-height: 0.85;
+  letter-spacing: -0.035em;
   color: #858585;
+  white-space: nowrap;
+  transform-origin: top left;
 }
 .preloader-fill {
   position: absolute;
   inset: 0;
-  display: flex;
   color: var(--red, #ff3154);
   clip-path: inset(0 calc(100% - var(--progress, 0%)) 0 0);
 }
-.preloader-letter {
-  display: block;
-}
-.preloader[data-state='leaving'] .preloader-letter {
-  animation: preloader-letter-out 380ms cubic-bezier(0.55, 0, 0.75, 0.3) both;
-  animation-delay: calc(var(--letter) * 32ms);
-}
-@keyframes preloader-letter-out {
-  to {
-    opacity: 0;
-    transform: translateY(-0.3em) rotate(-5deg);
-    filter: blur(6px);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .preloader[data-state='leaving'] .preloader-letter {
-    animation-duration: 1ms;
-    animation-delay: 0ms;
-  }
-  @keyframes preloader-letter-out {
-    to {
-      opacity: 0;
-    }
-  }
+.preloader[data-state='leaving'] .preloader-fill {
+  display: none;
 }

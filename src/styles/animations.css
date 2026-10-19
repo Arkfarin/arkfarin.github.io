@@ -1,18 +1,4 @@
 @media (prefers-reduced-motion: no-preference) {
-  html[data-loading] #root * {
-    animation-play-state: paused;
-  }
-  html:not([data-loading]) #root {
-    animation: site-in 200ms ease-out;
-  }
-  @keyframes site-in {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
   [data-reveal='pending'] {
     opacity: 0;
     transform: translateY(25px);
