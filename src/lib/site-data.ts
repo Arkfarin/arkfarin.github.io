@@ -73,6 +73,11 @@ function text(value: unknown): string {
     throw new Error('Expected nonempty text');
   return value.trim();
 }
+function optionalText(value: unknown): string | undefined {
+  if (value === undefined || (typeof value === 'string' && !value.trim()))
+    return undefined;
+  return text(value);
+}
 function webUrl(value: unknown): string {
   const url = text(value);
   const parsed = new URL(url);
@@ -92,7 +97,7 @@ function link(value: unknown): SiteLink {
   return {
     title: text(item.title),
     value: item.copyable ? text(item.value) : webUrl(item.value),
-    ...(item.alt !== undefined && { alt: text(item.alt) }),
+    alt: optionalText(item.alt),
     ...(item.background !== undefined && {
       background: webUrl(item.background),
     }),

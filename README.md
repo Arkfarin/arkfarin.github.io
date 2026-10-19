@@ -116,7 +116,8 @@ The recommended format for new entries is:
 
 `contacts` populates `#contact`; the single entry with `main: true` defines the main
 contact button. `others` populates the Other links section (`#links`). `alt` is an
-optional caption. `copyable: true` creates a button that copies the exact `value`
+optional caption; empty or whitespace-only strings are treated as omitted.
+`copyable: true` creates a button that copies the exact `value`
 and displays feedback, or a selectable value if clipboard access fails.
 
 Each entry in `projects`, `links.contacts` and `links.others` supports an optional
