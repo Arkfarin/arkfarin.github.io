@@ -41,7 +41,7 @@
   color: var(--red);
 }
 .rail-bottom {
-  padding: 0 18px 25px;
+  padding: 0 8px 25px;
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
@@ -68,16 +68,18 @@
     inset: 0 0 auto;
     border-right: 0;
     border-bottom: 1px solid var(--line);
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
-    padding: 0 22px;
+    gap: var(--space-2);
+    padding: 0 clamp(12px, 3vw, 22px);
   }
   .brand {
     font-size: 28px;
     padding: 0;
     line-height: 1;
     display: flex;
+    width: max-content;
     letter-spacing: -0.025em;
   }
   .brand > span {
@@ -85,20 +87,23 @@
   }
   .rail-bottom {
     padding: 0;
-    margin-left: auto;
     flex-direction: row;
-    gap: 0;
+    align-items: center;
+    gap: 6px;
   }
   .menu-toggle {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     gap: 6px;
     width: 44px;
     height: 44px;
+    flex: 0 0 44px;
     background: transparent;
-    margin-right: -10px;
-    padding: 11px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
+    padding: 0;
   }
   .menu-toggle span {
     height: 2px;
@@ -117,10 +122,12 @@
   }
 }
 @media (max-width: 380px) {
-  .rail {
-    padding-inline: 12px;
-  }
   .brand {
+    display: block;
     font-size: 22px;
+    line-height: 0.95;
+  }
+  .brand > span {
+    display: block;
   }
 }

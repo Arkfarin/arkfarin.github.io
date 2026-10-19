@@ -1,4 +1,5 @@
 .project-card {
+  --background-surface: var(--project-surface);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -72,6 +73,7 @@
 }
 @media (hover: hover) {
   .project-card:hover {
+    --background-surface: var(--project-hover);
     border-color: var(--red);
     background: var(--project-hover);
     transform: translateY(-4px);

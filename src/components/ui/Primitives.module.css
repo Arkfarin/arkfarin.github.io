@@ -27,6 +27,7 @@
   color: var(--bg);
 }
 .button-red {
+  --background-surface: var(--red);
   background: var(--red);
   color: var(--on-red);
   min-width: min(276px, 100%);
@@ -93,6 +94,7 @@
     transform: translate(3px, -3px);
   }
   .button-red:hover {
+    --background-surface: var(--fg);
     background: var(--fg);
     color: var(--bg);
   }

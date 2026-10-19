@@ -5,6 +5,7 @@ import { SiteRoutes } from './app/router';
 import { SiteDataContext, emptySiteData } from './data/site';
 import { fetchSiteData, parseSiteData } from './lib/site-data';
 import { startPreloader, waitForDocument, waitForFonts } from './lib/preloader';
+import { waitForBackgrounds } from './lib/backgrounds';
 import { initializeLanguage } from './i18n/store';
 import './styles/reset.css';
 import './styles/tokens.css';
@@ -34,6 +35,7 @@ async function bootstrap() {
     }
   }
   preloader.complete('data');
+  void waitForBackgrounds(data).then(() => preloader.complete('backgrounds'));
   // Prerendered HTML remains useful without JS. With JS, render the fresh Gist
   // rather than hydrating a potentially outdated build-time catalog.
   createRoot(document.getElementById('root')!).render(

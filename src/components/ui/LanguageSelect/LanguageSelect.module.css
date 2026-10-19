@@ -1,46 +1,59 @@
 .control {
   position: relative;
-  margin-inline: -12px;
+  min-width: 0;
 }
 .control select {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   appearance: none;
   width: 100%;
-  min-height: 44px;
-  padding: 10px 18px 10px 6px;
-  border: 1px solid var(--line);
-  border-radius: 0;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
   font: inherit;
-  font-size: 12px;
-  font-weight: 700;
+  font-size: 16px;
   color: var(--fg);
   background: var(--bg);
   cursor: pointer;
+  touch-action: manipulation;
 }
-.control span {
-  position: absolute;
-  right: 6px;
-  top: 9px;
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 10px 6px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  white-space: nowrap;
+  color: var(--fg);
+  background: var(--bg);
   pointer-events: none;
+}
+.label svg {
+  display: block;
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
   color: var(--muted);
 }
-.control select:focus-visible {
+.control select:focus-visible + .label {
   outline: 3px solid var(--accent);
   outline-offset: 4px;
 }
 @media (min-width: 761px) and (max-width: 1100px) {
-  .control select {
+  .label {
     font-size: 11px;
-    padding-inline: 4px 16px;
+    padding-inline: 4px;
   }
 }
 @media (max-width: 760px) {
   .control {
-    width: 128px;
-    margin-inline: 0;
     flex-shrink: 0;
-  }
-  .control select {
-    border: 0;
-    padding-left: 8px;
   }
 }

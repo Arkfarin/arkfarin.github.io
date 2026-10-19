@@ -4,6 +4,7 @@ export interface SiteLink {
   title: string;
   value: string;
   alt?: string;
+  background?: string;
   main?: boolean;
   copyable?: boolean;
 }

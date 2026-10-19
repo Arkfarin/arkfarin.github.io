@@ -11,6 +11,7 @@ export function Contact() {
   const { t } = useI18n();
   const { data } = useSiteData();
   const main = data.links.contacts.find((link) => link.main);
+  const secondaryContacts = data.links.contacts.filter((link) => !link.main);
   const revealRef = useReveal<HTMLElement>();
   return (
     <section
@@ -58,9 +59,10 @@ export function Contact() {
             </SiteLink>
           )}
         </div>
-        {data.links.contacts.length ? (
-          <SocialLinks links={data.links.contacts} />
-        ) : (
+        {secondaryContacts.length > 0 && (
+          <SocialLinks links={secondaryContacts} />
+        )}
+        {data.links.contacts.length === 0 && (
           <p>{t('emptyContacts')}</p>
         )}
       </div>

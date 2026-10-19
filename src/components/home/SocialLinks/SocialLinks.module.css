@@ -37,6 +37,7 @@
 }
 @media (hover: hover) {
   .social-link:hover {
+    --background-surface: var(--surface);
     background: var(--surface);
     padding-left: 17px;
     padding-right: 17px;

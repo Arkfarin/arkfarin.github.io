@@ -93,6 +93,9 @@ function link(value: unknown): SiteLink {
     title: text(item.title),
     value: item.copyable ? text(item.value) : webUrl(item.value),
     ...(item.alt !== undefined && { alt: text(item.alt) }),
+    ...(item.background !== undefined && {
+      background: webUrl(item.background),
+    }),
     main: item.main === true,
     copyable: item.copyable === true,
   };
@@ -134,6 +137,9 @@ export function parseSiteData(source: string): SiteData {
       slug,
       title: text(item.title),
       description: text(item.description),
+      ...(item.background !== undefined && {
+        background: webUrl(item.background),
+      }),
       technologies: [...new Set(list(item.technologies).map(text))],
       repository,
       branch: item.branch === undefined ? 'main' : text(item.branch),

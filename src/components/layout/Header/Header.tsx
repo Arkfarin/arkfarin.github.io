@@ -21,19 +21,19 @@ function HeaderMenu() {
       <div className={styles['rail-bottom']}>
         <LanguageSelect />
         <ThemeToggle />
+        <button
+          ref={buttonRef}
+          className={styles['menu-toggle']}
+          type="button"
+          aria-expanded={open}
+          aria-controls="navigation"
+          aria-label={open ? t('closeMenu') : t('openMenu')}
+          onClick={() => setOpen(!open)}
+        >
+          <span />
+          <span />
+        </button>
       </div>
-      <button
-        ref={buttonRef}
-        className={styles['menu-toggle']}
-        type="button"
-        aria-expanded={open}
-        aria-controls="navigation"
-        aria-label={open ? t('closeMenu') : t('openMenu')}
-        onClick={() => setOpen(!open)}
-      >
-        <span />
-        <span />
-      </button>
     </aside>
   );
 }

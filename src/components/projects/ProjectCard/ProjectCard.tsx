@@ -2,15 +2,25 @@ import { useI18n } from '@/hooks/useI18n';
 import { Link } from 'react-router';
 import { projectPath } from '@/data/projects';
 import type { Project } from '@/types/project';
+import { BackgroundImage } from '@/components/ui/BackgroundImage/BackgroundImage';
+import background from '@/components/ui/BackgroundImage/BackgroundImage.module.css';
 import styles from './ProjectCard.module.css';
 export function ProjectCard({ project }: { project: Project }) {
   const { t } = useI18n();
   return (
     <Link
-      className={styles['project-card']}
+      className={[
+        styles['project-card'],
+        project.background && background.surface,
+      ]
+        .filter(Boolean)
+        .join(' ')}
       to={projectPath(project.slug)}
       aria-label={t('openProject', { title: project.title })}
     >
+      {project.background && (
+        <BackgroundImage key={project.background} src={project.background} />
+      )}
       <div className={styles['project-card-top']}>
         <span>{project.category}</span>
         <span className={styles['project-card-arrow']} aria-hidden="true">

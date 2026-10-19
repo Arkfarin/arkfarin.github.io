@@ -156,10 +156,16 @@ export function startPreloader() {
   }
   requestAnimationFrame(frame);
   return {
-    complete(task: 'data' | 'fonts' | 'document' | 'page') {
+    complete(task: 'data' | 'fonts' | 'document' | 'page' | 'backgrounds') {
       if (tasks.has(task)) return;
       tasks.add(task);
-      target += { data: 55, fonts: 15, document: 10, page: 20 }[task];
+      target += {
+        data: 35,
+        fonts: 15,
+        document: 10,
+        page: 20,
+        backgrounds: 20,
+      }[task];
     },
     reveal,
   };
