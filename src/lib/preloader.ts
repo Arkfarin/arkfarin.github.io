@@ -1,6 +1,7 @@
 // Completed work sets the target; elapsed time can only slow it down.
 export function startPreloader() {
   const overlay = document.getElementById('preloader');
+  const progress = overlay?.querySelector<HTMLElement>('.preloader-progress');
   const root = document.getElementById('root')!;
   const start = performance.now();
   const tasks = new Set<string>();
@@ -18,7 +19,9 @@ export function startPreloader() {
     shown = Math.min(allowed, shown + ((now - previous) / 140) * 100);
     previous = now;
     overlay?.style.setProperty('--progress', `${shown}%`);
-    overlay?.setAttribute('aria-valuenow', String(Math.floor(shown)));
+    const percent = String(Math.floor(shown));
+    overlay?.setAttribute('aria-valuenow', percent);
+    if (progress) progress.textContent = `${percent}%`;
     if (shown < 100) requestAnimationFrame(frame);
     else void finish();
   }
@@ -66,7 +69,14 @@ export function startPreloader() {
           }),
         );
       };
+      if (progress) animate(progress, [{ opacity: 1 }, { opacity: 0 }], 320);
       if (morph) {
+        const content =
+          overlay.querySelector<HTMLElement>('.preloader-content');
+        if (content) {
+          content.style.width = `${source.width}px`;
+          content.style.height = `${source.height}px`;
+        }
         const type = getComputedStyle(targetWord);
         targetWord.setAttribute('data-preloader-target', '');
         Object.assign(word.style, {

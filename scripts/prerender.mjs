@@ -51,15 +51,15 @@ for (const page of pages) {
   );
   if (page.project || page.missing || page.listing) {
     const title = page.project
-      ? `${page.project.title} — проекты Arkfarin`
+      ? `${page.project.title} — Arkfarin projects`
       : page.listing
-        ? 'Projects — проекты Arkfarin'
-        : 'Страница не найдена — Arkfarin';
+        ? 'Projects — Arkfarin'
+        : 'Page not found — Arkfarin';
     const description =
       page.project?.description ??
       (page.listing
-        ? 'Все проекты Arkfarin: инструменты, приложения и эксперименты.'
-        : 'Такой страницы нет. Вернитесь к проектам Arkfarin.');
+        ? 'All Arkfarin projects: tools, apps and experiments.'
+        : 'This page doesn’t exist. Return to Arkfarin’s projects.');
     html = html
       .replace(/<title>.*?<\/title>/, `<title>${escape(title)}</title>`)
       .replace(

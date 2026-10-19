@@ -45,9 +45,9 @@ export const ru = {
   openProject: 'Открыть проект {title}',
   details: 'Подробнее',
   emptyProjects: 'Проекты пока не добавлены.',
-  projectsPageTitle: 'Projects',
+  projectsPageTitle: 'Проекты',
   projectsSubtitle: 'Инструменты, приложения и эксперименты.',
-  projectsMetaTitle: 'Projects — проекты Arkfarin',
+  projectsMetaTitle: 'Проекты — Arkfarin',
   projectsMetaDescription:
     'Все проекты Arkfarin: инструменты, приложения и эксперименты.',
   homeBack: 'На главную',

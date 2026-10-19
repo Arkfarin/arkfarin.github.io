@@ -1,80 +1,82 @@
 # ARKFARIN
 
-Исходники личного сайта [ark.farin.cc](https://ark.farin.cc).
-Каталог проектов и ссылки загружаются из Gist, README — из GitHub-репозиториев проектов.
+Source code for [ark.farin.cc](https://ark.farin.cc), my personal website.
+The project catalog and links come from a Gist; project READMEs come from their GitHub repositories.
 
-## Стек и структура
+## Stack and structure
 
-React 19, React Router, TypeScript strict, Vite, CSS Modules и CSS Custom Properties.
-Markdown: react-markdown, remark-gfm, rehype-raw + rehype-sanitize; подсветка —
-Lowlight/Highlight.js с ограниченным набором языков. ESLint и Prettier.
+React 19, React Router, strict TypeScript, Vite, CSS Modules and CSS Custom Properties.
+Markdown uses react-markdown, remark-gfm, rehype-raw and rehype-sanitize.
+Lowlight/Highlight.js provides syntax highlighting for a limited set of languages.
+ESLint and Prettier handle code quality and formatting.
 
 ```text
 src/
-  app/                 оболочка и маршруты
+  app/                 application shell and routes
   pages/               Home, Projects, Project, NotFound
   components/
     layout/            Header, Navigation, Footer
     home/              Hero, About, Projects, OtherLinks, Contact, SocialLinks
-    projects/          карточки, сетка, Markdown, код и оглавление
-    ui/                ThemeToggle и общие CSS-примитивы
-  hooks/               тема, меню, clipboard, scroll, media query, reveal
-  lib/                 Markdown, ссылки, якоря, подсветка, хранилище темы
-  data/                контекст данных Gist, загрузка README, навигация
-  styles/              reset, tokens, typography, global, animations
-  types/               модели данных
-  main.tsx             клиентский вход
-  entry-server.tsx     предварительный рендер тех же компонентов
+    projects/          cards, grid, Markdown, code and table of contents
+    ui/                theme and language controls, shared UI primitives
+  hooks/               theme, menus, clipboard, scrolling, media queries, reveals
+  i18n/                translations and language preferences
+  lib/                 Markdown, links, anchors, highlighting, loading and theme
+  data/                Gist data context, README loading and navigation
+  styles/              reset, tokens, typography, global styles and animations
+  types/               data models
+  main.tsx             client entry point
+  entry-server.tsx     prerendering with the same components
 public/
-  assets/              favicon, шрифты и лицензии
-  theme-init.js        определение темы до первого отображения
-  preloader.css        начальный экран загрузки до запуска React
-scripts/               предварительный рендер из Gist и GitHub
+  assets/              favicon, fonts and licenses
+  theme-init.js        theme and language selection before the first paint
+  preloader.css        loading screen shown before React starts
+scripts/               prerendering with Gist and GitHub data
 ```
 
-Компонентные стили находятся рядом с компонентами. `Primitives.module.css` содержит
-только повторяемые визуальные элементы: кнопки-ссылки, подписи секций и акцентный текст.
-Глобальный CSS не оформляет компоненты. Импорт `@/` указывает на `src/`.
+Component styles live alongside their components. `Primitives.module.css` contains
+shared visual elements: link buttons, section labels and accent text.
+Global CSS does not style individual components. The `@/` alias points to `src/`.
 
-## Установка и запуск
+## Getting started
 
-Node.js **22.12+** (рекомендуется актуальная LTS), npm:
+Use Node.js **22.12+** and npm. The deployment workflow uses Node.js 24.
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Локальный адрес выводит Vite. Для проверки production-версии:
+Vite prints the local URL. To preview the production build:
 
 ```bash
 npm run build
 npm run preview
 ```
 
-`build` выполняет typecheck, клиентскую сборку Vite, временную серверную сборку и
-предварительный рендер **тех же React-компонентов**. Результат — `dist/index.html`,
-`dist/projects/index.html`, `dist/projects/<slug>/index.html`, `404.html` и ассеты.
-Временный `.ssr/` удаляется. Node.js на хостинге не требуется. Контент доступен
-в HTML без JavaScript. В браузере клиент запрашивает свежие данные и заменяет
-снимок сборки после загрузки. При недоступности Gist остаётся снимок с сообщением
-об ошибке и кнопкой повторного запроса.
+The build runs TypeScript checking, the Vite client build, a temporary server build
+and prerendering with **the same React components**. It produces `dist/index.html`,
+`dist/projects/index.html`, `dist/projects/<slug>/index.html`, `dist/404.html` and
+assets. The temporary `.ssr/` directory is removed. Hosting does not require Node.js.
+Content is available in the HTML without JavaScript. In the browser, the client
+fetches fresh data and replaces the build snapshot once loading finishes. If the
+Gist is unavailable, the snapshot remains visible with an error message and a retry button.
 
-`dist/` не редактируется и не хранится в Git.
+`dist/` is generated output: do not edit it or commit it to Git.
 
-## Данные, проекты и ссылки
+## Data, projects and links
 
-Единственный источник каталога и ссылок —
-[Gist](https://gist.github.com/Arkfarin/1a4b2ba90dde5629ace2f9330522f0cd/raw).
-Сборка запрашивает этот адрес. Браузер запрашивает его конечный адрес на
-`gist.githubusercontent.com`: перенаправление с `gist.github.com` не содержит
-CORS-заголовков. Запрос выполняется один раз при открытии сайта, с тайм-аутом 15 с.
-Внутренние переходы используют уже загруженные данные.
+The [Gist](https://gist.github.com/Arkfarin/1a4b2ba90dde5629ace2f9330522f0cd/raw)
+is the only source for the project catalog and contact/profile links.
+The build fetches this URL. The browser uses its final URL on
+`gist.githubusercontent.com`, since the redirect from `gist.github.com` does not
+include CORS headers. Data is fetched once when the site opens, with a 15-second
+timeout. Internal navigation reuses the loaded data.
 
-Поддерживаются обычный JSON, комментарии и текущая запись Gist с объектами
-`["title": ...]` внутри коллекций `{ ... }`. Удалённый текст разбирается без `eval`;
-проверяются URL, поля, уникальность slug и единственность `main`.
-Рекомендуемый формат новых записей:
+The parser supports standard JSON, comments and the Gist's existing format with
+`["title": ...]` objects inside `{ ... }` collections. Remote text is parsed without
+`eval`; URLs, fields, unique slugs and the single `main` contact are validated.
+The recommended format for new entries is:
 
 ```json
 {
@@ -101,7 +103,7 @@ CORS-заголовков. Запрос выполняется один раз �
     {
       "slug": "my-project",
       "title": "My Project",
-      "description": "Краткое описание проекта.",
+      "description": "A short project description.",
       "background": "https://example.com/project.webp",
       "technologies": ["Python"],
       "repository": "https://github.com/owner/my-project",
@@ -112,99 +114,112 @@ CORS-заголовков. Запрос выполняется один раз �
 }
 ```
 
-`contacts` заполняет `#contact`; единственная запись с `main: true` задаёт основную
-кнопку связи. `others` заполняет блок «Остальные ссылки» (`#links`). `alt` —
-необязательная подпись. `copyable: true` создаёт кнопку, копирующую точное `value`,
-и показывает результат или значение для ручного копирования при отказе clipboard.
+`contacts` populates `#contact`; the single entry with `main: true` defines the main
+contact button. `others` populates the Other links section (`#links`). `alt` is an
+optional caption. `copyable: true` creates a button that copies the exact `value`
+and displays feedback, or a selectable value if clipboard access fails.
 
-Каждая запись `projects`, `links.contacts` и `links.others` поддерживает
-необязательное поле `background` — прямой HTTP(S)-URL изображения (включая GIF,
-WebP, PNG, JPEG, AVIF и SVG, если формат поддерживается браузером). Это фон карточки
-проекта или ссылки, в том числе главной кнопки контакта и копируемых значений.
-Изображение заполняет блок с кадрированием по центру, имеет видимость **80%**
-(`opacity: 0.8`); поверх него лежит градиент под цвет блока для читаемости текста.
-При копировании временная красная заливка и надпись «СКОПИРОВАНО!» перекрывают фон.
-Без `background` сохраняется обычное оформление. Ошибка загрузки изображения
-оставляет блок читаемым и не мешает открыть ссылку или скопировать значение.
+Each entry in `projects`, `links.contacts` and `links.others` supports an optional
+`background` field with a direct HTTP(S) image URL. This includes GIF, WebP, PNG,
+JPEG, AVIF and SVG when supported by the browser. The image appears behind the
+project card or link, including the main contact button and copyable values.
+Images fill their container with centered cropping and **80% opacity**, with a
+horizontal tint for text readability. Only the left and right edges fade to
+transparency; there is no bottom shadow or vertical fade. Hovering or focusing a
+link gently zooms and shifts its image while the edge mask stays fixed. This
+animation is disabled for reduced motion. Copy feedback
+temporarily covers the image with a red fill and a confirmation label. Entries
+without `background` keep their regular appearance. Image loading failures do not
+prevent opening links or copying values.
 
-Главная показывает первые **два** проекта. При большем количестве под карточками
-появляется «Остальные проекты». Страница **Projects** (`/projects/`) показывает все
-записи. Чтобы добавить проект, достаточно изменить Gist; клиентские маршруты и
-карточки создаются из данных. README загружается из `repository` и `branch`, а
-`readme_blob_sha` входит в ключ кэша. `category` и `language` необязательны.
+The home page shows the first **two** projects. If there are more, a More projects
+link appears below the cards. The **Projects** page (`/projects/`) shows all entries.
+Adding a project only requires updating the Gist; client routes and cards are
+created from the data. READMEs are fetched using `repository` and `branch`, while
+`readme_blob_sha` forms part of the cache key. `category` and `language` are optional.
 
-Для статического HTML нового маршрута на хостинге без SPA fallback потребуется
-пересборка. GitHub Pages отдаёт `404.html` для ещё не собранного адреса: после
-загрузки JS клиент отобразит проект из Gist, но HTTP-статус останется 404.
+A new route needs a rebuild to receive its own static HTML on hosts without an SPA
+fallback. GitHub Pages serves `404.html` for routes not included in the build.
+Once JavaScript loads, the client can display the project from the Gist, but the
+HTTP status remains 404.
 
-## Прелоадер
+The footer also includes MyNickname and Farin Works. These fixed links live in
+`src/data/navigation.ts` and open in a new tab.
 
-До запуска приложения показывается серый `ARKFARIN` на фоне выбранной темы.
-Красное заполнение зависит от завершённых задач: данных Gist (35%), шрифтов (15%),
-начальной загрузки документа (10%), рендера страницы (20%, включая README при
-прямом открытии проекта) и фоновых изображений (20%). Все уникальные URL из
-`background` проектов и обоих списков ссылок загружаются параллельно; прелоадер
-ожидает загрузку и декодирование изображений. Повторяющиеся адреса учитываются
-один раз. Если фонов нет, этап завершается сразу. Ошибка или тайм-аут **15 с**
-для отдельного изображения завершают его ожидание, чтобы сайт оставался доступен.
-При неизвестном размере ответа прогресс идёт по этапам,
-а не по выдуманным байтам. Заполнение ограничено минимумом **500 мс**, даже из кэша.
-После 100% буквы исчезают по очереди, затем открывается сайт. При reduced motion
-исчезновение происходит без перемещения; минимум 500 мс сохраняется.
-Ошибки данных/README завершают ожидание и показываются в интерфейсе с повтором.
-Без JavaScript прелоадер скрыт и доступен статический HTML.
+## Preloader
 
-## Markdown и изображения
+Before the application starts, a gray `ARKFARIN` wordmark appears against the
+selected theme. A percentage below it follows the same progress as the red fill.
+Progress reflects completed tasks: Gist data (35%), fonts (15%), the initial
+document load (10%), page rendering (20%, including the README on direct project
+visits) and background images (20%). All unique `background` URLs from projects
+and both link lists load in parallel; the preloader waits for image loading and
+decoding. Duplicate URLs count once. If there are no backgrounds, this stage
+finishes immediately. An error or a **15-second** timeout ends the wait for an
+individual image so the site remains accessible.
 
-Редактируйте README в репозитории проекта. Поддерживаются заголовки, вложенные списки, таблицы,
-задачи, зачёркивание, ссылки, изображения, цитаты и fenced code blocks. Повторный
-первый H1, совпадающий с названием проекта, не дублируется в интерфейсе. Оглавление
-собирается из H2–H6; одинаковые заголовки получают разные якоря.
+When response sizes are unknown, progress advances by completed stages rather than
+estimated bytes. The fill takes at least **500 ms**, even with cached resources.
+At 100%, the percentage fades out. On the home page, the wordmark moves into the
+hero while the page appears; direct project visits and deep links use a fade.
+With reduced motion enabled, the page is revealed without animation; the 500 ms
+minimum remains. Data and README errors end the loading wait and appear in the UI
+with retry controls. Without JavaScript, the preloader is hidden and static HTML
+remains available.
 
-HTML внутри README проходит санитизацию. Поддерживаются
-`picture`, `source`, `img` и выравнивание. Скрипты, обработчики событий и опасные
-URL удаляются. Для подсветки укажите язык после трёх обратных кавычек: `bash`,
-`python`, `powershell`, `javascript`, `typescript`, `json`, `css`, `xml` (или их
-алиасы). Неизвестный язык остаётся читаемым текстом. Дополнительные языки
-регистрируются в `src/lib/markdown/plugins.ts`.
+## Markdown and images
 
-Относительные ссылки считаются относительно корня **репозитория проекта**, где
-лежит исходный README: ссылки ведут на GitHub `blob/<branch>/`, изображения — на
-`raw.githubusercontent.com`. Фрагменты `#раздел` остаются локальными.
-Изображения загружаются по адресам из README. Кнопка «Скачать .md» сохраняет
-загруженный README без дополнительного сетевого запроса.
+Edit each project's README in its own repository. The renderer supports headings,
+nested lists, tables, task lists, strikethrough, links, images, quotes and fenced
+code blocks. A leading H1 matching the project title is not repeated in the UI.
+The table of contents uses H2–H6 headings; duplicate headings receive distinct anchors.
 
-## Темы, анимации и доступность
+HTML inside READMEs is sanitized. Supported elements include `picture`, `source`
+and `img`, along with alignment attributes. Scripts, event handlers and unsafe
+URLs are removed. To enable highlighting, specify a language after the opening
+triple backticks: `bash`, `python`, `powershell`, `javascript`, `typescript`, `json`,
+`css`, `xml` or their aliases. Unknown languages remain readable plain text.
+Additional languages can be registered in `src/lib/markdown/plugins.ts`.
 
-Переключатель языка в навигации поддерживает **RU / EN / UK / JA / ZH / KY**:
-русский, английский, украинский, японский, упрощённый китайский и кыргызский.
-По умолчанию выбран русский. Выбор хранится в `arkfarin-language`, сохраняется
-при переходах и перезагрузке и синхронизируется между вкладками. Если localStorage
-заблокирован, переключение продолжает работать в текущей вкладке.
+Relative links resolve from the root of the **project repository** containing the
+README: links point to GitHub's `blob/<branch>/` paths, and images point to
+`raw.githubusercontent.com`. `#section` fragments stay local. Images use the URLs
+from the README. Download .md saves the loaded README without another network request.
 
-Переводится только интерфейс: навигация, тексты главной, действия, ошибки,
-метаданные страниц и подписи для скринридеров. Данные из Gist и README отображаются
-в исходном виде. Словари находятся в `src/i18n/locales/`; TypeScript
-проверяет одинаковый набор ключей во всех шести языках.
+## Languages, themes and accessibility
 
-Анимации красной полосы, ARKFARIN и вступительного текста приостановлены, пока
-виден прелоадер, и запускаются после его исчезновения. Анимации секций при прокрутке
-и реакции на наведение сохранены.
+The language selector supports **EN / RU / UK / JA / ZH / KY**: English, Russian,
+Ukrainian, Japanese, Simplified Chinese and Kyrgyz. **English is the default**,
+including prerendered HTML and page metadata. The selection is stored under
+`arkfarin-language`, survives navigation and reloads, and syncs across tabs.
+If localStorage is blocked, language changes still work in the current tab.
 
-Палитра, размеры, отступы, радиусы, длительности и z-index заданы в
-`src/styles/tokens.css`. `data-theme="light|dark"` на `<html>` выбирает палитру.
-`public/theme-init.js` запускается до CSS: сохранённый `arkfarin-theme` имеет
-приоритет, иначе используется системная тема. Без сохранённого выбора тема
-реагирует на настройки ОС; выбор синхронизируется между вкладками. Для возврата
-к системной теме удалите ключ `arkfarin-theme` из localStorage и перезагрузите страницу.
+Translations cover the interface: navigation, home page copy, actions, errors,
+page metadata and screen reader labels. Gist data and project READMEs retain
+their original text. Dictionaries live in `src/i18n/locales/`; TypeScript checks
+that all six languages use the same set of keys.
 
-Меню закрывается ссылкой, Escape, кликом/фокусом вне него и сменой брейкпоинта.
-Есть skip-link, видимый focus и семантические области. CSS отвечает за hover и
-вступительную анимацию; IntersectionObserver — за появление секций. Хуки очищают
-обработчики, observer, таймеры и requestAnimationFrame. При reduced motion
-перемещения и плавная прокрутка отключаются.
+The hero's red band, wordmark and introductory text animate as the preloader
+reveals the page. Sections also animate into view on scroll, and interactive
+elements respond to hover.
 
-## Типы и стиль кода
+Colors, dimensions, spacing, radii, durations and z-index values live in
+`src/styles/tokens.css`. The `<html>` attribute `data-theme="light|dark"` selects
+the palette. `public/theme-init.js` runs before the first paint: a saved
+`arkfarin-theme` preference takes priority, otherwise the system theme is used.
+Without a saved choice, the theme follows OS changes; explicit choices sync
+across tabs. To return to the system theme, remove `arkfarin-theme` from
+localStorage and reload.
+
+The menu closes when a link is selected, Escape is pressed, a click or focus moves
+outside it, or the viewport crosses the mobile breakpoint. The site includes a
+skip link, visible focus indicators and
+semantic landmarks. CSS handles hover and entrance animations;
+IntersectionObserver handles section reveals. Hooks clean up listeners,
+observers, timers and animation frames. Reduced motion disables movement and
+smooth scrolling.
+
+## Types and code style
 
 ```bash
 npm run typecheck
@@ -212,20 +227,26 @@ npm run lint
 npm run format:check
 ```
 
-## Статический хостинг
+## Static hosting
 
-Публикуйте содержимое `dist/`, а не исходники. Известные маршруты уже имеют свои
-`index.html`, поэтому прямые ссылки и обновление страниц работают на обычном
-файловом сервере. Для неизвестных адресов настройте выдачу `404.html` со статусом 404. Хостинги с SPA fallback также поддерживаются, но их HTTP-статус зависит от
-настройки сервера. `vite preview` предназначен только для локальной проверки.
+Publish the contents of `dist/`. Known routes already have their own `index.html`,
+so direct links and page reloads work on a regular file server. Configure unknown
+URLs to serve `404.html` with a 404 status. Hosts with an SPA fallback are also
+supported, but their HTTP status depends on the server configuration.
+`vite preview` is intended for local previews only.
 
-Для `arkfarin.github.io` и домена `ark.farin.cc` используется `base: '/'`.
-Для публикации в подкаталоге задайте, например, `SITE_BASE=/portfolio/ npm run build`.
-Путь должен начинаться и заканчиваться `/`; относительный `./` не поддерживается.
+Use `base: '/'` for `arkfarin.github.io` and `ark.farin.cc`. For a subdirectory,
+build with a setting such as `SITE_BASE=/portfolio/ npm run build`. The path must
+start and end with `/`; a relative `./` base is not supported.
 
-Для GitHub Pages включите **Settings → Pages → Source: GitHub Actions** и загрузите
-`dist/` через `actions/upload-pages-artifact`, затем `actions/deploy-pages`.
-Для собственного домена укажите `ark.farin.cc` в настройках Pages и настройте DNS.
-Рекомендации: [Vite: static deploy](https://vite.dev/guide/static-deploy.html),
-[GitHub Pages: workflows](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
-Публикация и настройки удалённого хостинга не выполняются локальными npm-командами.
+The [GitHub Pages workflow](.github/workflows/pages.yml) runs on pushes to `main`
+and pull requests targeting `main`. It installs dependencies with `npm ci` on
+Node.js 24 and runs `npm run build`. Pushes publish `dist/` to GitHub Pages;
+pull requests build the site without publishing. There are no test steps.
+
+In the repository, set **Settings → Pages → Build and deployment → Source** to
+**GitHub Actions**. The `github-pages` environment must allow deployment from
+`main`. To use a custom domain, set `ark.farin.cc` in Pages settings and configure
+DNS. See [Vite's static deployment guide](https://vite.dev/guide/static-deploy.html)
+and [GitHub's Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+Local npm commands do not publish the site or change remote hosting settings.

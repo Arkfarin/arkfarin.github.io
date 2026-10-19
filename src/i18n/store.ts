@@ -1,4 +1,4 @@
-import { isLocale, translate, type Locale } from './messages';
+import { defaultLocale, isLocale, translate, type Locale } from './messages';
 
 const key = 'arkfarin-language';
 const listeners = new Set<() => void>();
@@ -10,7 +10,7 @@ function preference(): Locale {
   } catch {
     /* A selection still works for this tab when storage is blocked. */
   }
-  return 'ru';
+  return defaultLocale;
 }
 function apply(locale: Locale) {
   selected = locale;
@@ -21,7 +21,7 @@ function apply(locale: Locale) {
   listeners.forEach((notify) => notify());
 }
 export const languageSnapshot = (): Locale => selected ?? preference();
-export const serverLanguage = (): Locale => 'ru';
+export const serverLanguage = (): Locale => defaultLocale;
 export function initializeLanguage() {
   apply(preference());
 }

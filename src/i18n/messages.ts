@@ -5,8 +5,9 @@ import { ja } from './locales/ja';
 import { zh } from './locales/zh';
 import { ky } from './locales/ky';
 
-export const locales = ['ru', 'en', 'uk', 'ja', 'zh', 'ky'] as const;
+export const locales = ['en', 'ru', 'uk', 'ja', 'zh', 'ky'] as const;
 export type Locale = (typeof locales)[number];
+export const defaultLocale: Locale = 'en';
 export const localeNames: Record<Locale, string> = {
   ru: 'Русский',
   en: 'English',

@@ -24,6 +24,21 @@ html[data-loading] .preloader {
 html[data-theme='dark'] .preloader {
   background: var(--bg, #141517);
 }
+.preloader-content {
+  position: relative;
+}
+.preloader-progress {
+  position: absolute;
+  top: calc(100% + 24px);
+  inset-inline: 0;
+  text-align: center;
+  font-family: Manrope, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  color: var(--muted, #858585);
+}
 .preloader-word {
   position: relative;
   display: block;

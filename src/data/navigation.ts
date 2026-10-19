@@ -5,3 +5,8 @@ export const navigation = [
   { id: 'links', label: 'navLinks' },
   { id: 'contact', label: 'navContact' },
 ] as const;
+
+export const footerLinks = [
+  { label: 'MyNickname', href: 'https://mynickname.com/ru/id1847474' },
+  { label: 'Farin Works', href: 'https://github.com/farin-works' },
+] as const;
