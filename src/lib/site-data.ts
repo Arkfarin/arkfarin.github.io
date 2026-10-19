@@ -4,7 +4,7 @@ import type { Project } from '../types/project';
 const SITE_DATA_URL =
   'https://gist.github.com/Arkfarin/1a4b2ba90dde5629ace2f9330522f0cd/raw';
 // gist.github.com's redirect lacks CORS headers; its raw destination allows browser requests.
-export const SITE_DATA_RAW_URL = SITE_DATA_URL.replace(
+const SITE_DATA_RAW_URL = SITE_DATA_URL.replace(
   'gist.github.com',
   'gist.githubusercontent.com',
 );

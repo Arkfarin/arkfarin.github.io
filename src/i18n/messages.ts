@@ -15,7 +15,7 @@ export const localeNames: Record<Locale, string> = {
   zh: '简体中文',
   ky: 'Кыргызча',
 };
-export const messages: Record<Locale, Messages> = { ru, en, uk, ja, zh, ky };
+const messages: Record<Locale, Messages> = { ru, en, uk, ja, zh, ky };
 export function isLocale(value: unknown): value is Locale {
   return (
     typeof value === 'string' && locales.some((locale) => locale === value)
