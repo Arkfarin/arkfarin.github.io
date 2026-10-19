@@ -4,7 +4,6 @@ import { uk } from './locales/uk';
 import { ja } from './locales/ja';
 import { zh } from './locales/zh';
 import { ky } from './locales/ky';
-export type { MessageKey } from './locales/ru';
 
 export const locales = ['ru', 'en', 'uk', 'ja', 'zh', 'ky'] as const;
 export type Locale = (typeof locales)[number];

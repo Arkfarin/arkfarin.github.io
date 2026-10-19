@@ -36,17 +36,17 @@ test('the Gist controls projects, contacts, other links and clipboard actions', 
     page.getByRole('link', { name: /Написать в Email service/ }),
   ).toHaveAttribute('href', 'https://example.com/contact');
   await expect(
-    page.locator('#contact').getByRole('link', { name: /Telegram/ }),
+    page.locator('#contact').getByRole('link', { name: /Contact/ }),
   ).toHaveCount(0);
   await expect(
-    page.locator('#links').getByRole('link', { name: /Steam/ }),
-  ).toHaveAttribute('href', 'https://steamcommunity.com/id/arkfarin');
-  await page.getByRole('button', { name: 'Скопировать MLBB' }).click();
+    page.locator('#links').getByRole('link', { name: /Profile/ }),
+  ).toHaveAttribute('href', 'https://example.com/profile');
+  await page.getByRole('button', { name: 'Скопировать Game ID' }).click();
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-    '123456789 (1234)',
+    '1234 (56)',
   );
   await expect(page.locator('#links').getByRole('status')).toHaveText(
-    'MLBB: скопировано',
+    'Game ID: скопировано',
   );
   await page.getByRole('link', { name: /Остальные проекты/ }).click();
   await expect(page).toHaveURL(/\/projects\/$/);
@@ -58,7 +58,7 @@ test('the Gist controls projects, contacts, other links and clipboard actions', 
   await expect(
     page.getByRole('heading', { name: 'Third project', exact: true }),
   ).toBeVisible();
-  await expect(page.locator('article')).toContainText('Quiet Precision');
+  await expect(page.locator('article')).toContainText('Example README.');
   expect(requests).toBe(1);
   await expect(page.locator('#preloader')).toHaveCount(0);
   await page.goto('/projects/third-project/');
@@ -147,16 +147,16 @@ test('font loading and README loading both hold the preloader until settled', as
     releaseReadme = resolve;
   });
   await page.route(
-    'https://raw.githubusercontent.com/Arkfarin/KIYORA/main/README.md',
+    'https://raw.githubusercontent.com/example/alpha/main/README.md',
     async (route) => {
       await readme;
       await route.fulfill({
         contentType: 'text/plain',
-        body: '# KIYORA\n\n## Loaded remotely\n\nActual content.',
+        body: '# Alpha\n\n## Loaded remotely\n\nActual content.',
       });
     },
   );
-  await page.goto('/projects/kiyora/', { waitUntil: 'domcontentloaded' });
+  await page.goto('/projects/alpha/', { waitUntil: 'domcontentloaded' });
   await expect
     .poll(async () =>
       Number(await page.getByRole('progressbar').getAttribute('aria-valuenow')),
@@ -197,7 +197,7 @@ test('a failed page module ends loading with a retry action', async ({
 }) => {
   await mockData(page);
   await page.route('**/assets/Project-*.js', (route) => route.abort());
-  await page.goto('/projects/kiyora/');
+  await page.goto('/projects/alpha/');
   await ready(page);
   await expect(
     page.getByRole('heading', { name: 'Не удалось открыть страницу.' }),
@@ -223,16 +223,16 @@ test('empty data, malformed data and README errors do not trap visitors behind t
   await expect(page.getByRole('alert')).toBeVisible();
   await mockData(page);
   await page.route(
-    'https://raw.githubusercontent.com/Arkfarin/KIYORA/main/README.md',
+    'https://raw.githubusercontent.com/example/alpha/main/README.md',
     (route) => route.fulfill({ status: 503 }),
   );
-  await page.goto('/projects/kiyora/');
+  await page.goto('/projects/alpha/');
   await ready(page);
   await expect(page.getByRole('alert')).toContainText(
     'Не удалось загрузить README',
   );
   await page.route(
-    'https://raw.githubusercontent.com/Arkfarin/KIYORA/main/README.md',
+    'https://raw.githubusercontent.com/example/alpha/main/README.md',
     (route) => route.fulfill({ body: '## Recovered README' }),
   );
   await page.getByRole('button', { name: 'Повторить загрузку' }).click();

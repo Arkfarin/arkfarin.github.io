@@ -1,17 +1,15 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import { parseSiteData } from '../src/lib/site-data';
 
-const source = await readFile('tests/fixtures/site.gist', 'utf8');
-const fixture = parseSiteData(source);
+import { siteData as fixture } from './fixtures/site-data';
 
-test('the published Gist format preserves URLs, main contact and copyable IDs', () => {
+test('the Gist format preserves URLs, main contact and copyable IDs', () => {
   assert.equal(fixture.projects.length, 2);
-  assert.equal(fixture.links.contacts[0].value, 'https://telegram.me/arkfarin');
+  assert.equal(fixture.links.contacts[0].value, 'https://example.com/contact');
   assert.equal(fixture.links.contacts.filter((link) => link.main).length, 1);
-  assert.equal(fixture.links.others[2].copyable, true);
-  assert.equal(fixture.links.others[2].value, '123456789 (1234)');
+  assert.equal(fixture.links.others[1].copyable, true);
+  assert.equal(fixture.links.others[1].value, '1234 (56)');
   assert.equal(fixture.projects[0].category, undefined);
   assert.deepEqual(parseSiteData(JSON.stringify(fixture)), fixture);
 });

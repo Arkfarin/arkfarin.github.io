@@ -1,4 +1,4 @@
-export type Theme = 'light' | 'dark';
+type Theme = 'light' | 'dark';
 const key = 'arkfarin-theme';
 const listeners = new Set<() => void>();
 let override: Theme | undefined;

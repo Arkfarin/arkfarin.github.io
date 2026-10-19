@@ -60,27 +60,9 @@ export function MarkdownRenderer({
           {children}
         </a>
       ),
-      img: ({ node: _node, src, alt, ...props }) => {
-        const asset = Object.values(project.assets ?? {}).find(
-          (asset) => src === `${import.meta.env.BASE_URL}${asset?.src}`,
-        );
-        return (
-          <img
-            {...props}
-            src={src}
-            alt={alt ?? ''}
-            className={
-              asset?.width && asset?.height
-                ? styles['project-image']
-                : props.className
-            }
-            width={asset?.width ?? props.width}
-            height={asset?.height ?? props.height}
-            loading="lazy"
-            decoding="async"
-          />
-        );
-      },
+      img: ({ node: _node, alt, ...props }) => (
+        <img {...props} alt={alt ?? ''} loading="lazy" decoding="async" />
+      ),
       picture: ({ node, ...props }) => (
         <MarkdownPicture {...props} node={node} project={project} />
       ),
@@ -92,12 +74,7 @@ export function MarkdownRenderer({
             .map((candidate) => {
               const [url, ...descriptor] = candidate.trim().split(/\s+/);
               return [
-                resolveMarkdownUrl(
-                  url,
-                  project,
-                  true,
-                  import.meta.env.BASE_URL,
-                ),
+                resolveMarkdownUrl(url, project, true),
                 ...descriptor,
               ].join(' ');
             })
@@ -143,12 +120,7 @@ export function MarkdownRenderer({
         ]}
         components={components}
         urlTransform={(url, key) =>
-          resolveMarkdownUrl(
-            url,
-            project,
-            key === 'src' || key === 'srcSet',
-            import.meta.env.BASE_URL,
-          )
+          resolveMarkdownUrl(url, project, key === 'src' || key === 'srcSet')
         }
       >
         {markdown}

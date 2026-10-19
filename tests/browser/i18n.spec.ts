@@ -86,7 +86,7 @@ for (const locale of locales) {
     await expect(page.locator('html')).toHaveAttribute('lang', locale);
     await page
       .getByRole('link', {
-        name: translate(locale, 'openProject', { title: 'KIYORA' }),
+        name: translate(locale, 'openProject', { title: 'Alpha' }),
       })
       .click();
     await expect(
@@ -96,7 +96,7 @@ for (const locale of locales) {
       page.getByRole('button', { name: text.copyCode }).first(),
     ).toBeVisible();
     await expect(page).toHaveTitle(
-      translate(locale, 'projectMetaTitle', { title: 'KIYORA' }),
+      translate(locale, 'projectMetaTitle', { title: 'Alpha' }),
     );
     await page.goto('/missing-page/');
     await ready(page);

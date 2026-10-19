@@ -4,8 +4,8 @@ import { StaticRouter } from 'react-router';
 import { SiteRoutes } from './app/router';
 import { SiteDataContext } from './data/site';
 import type { SiteData } from './types/site';
-export { primeMarkdown, loadMarkdown } from './data/projects';
-export { fetchSiteData, parseSiteData } from './lib/site-data';
+export { loadMarkdown } from './data/projects';
+export { fetchSiteData } from './lib/site-data';
 
 export function render(url: string, data: SiteData): Promise<string> {
   return new Promise((resolve, reject) => {

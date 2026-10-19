@@ -3,17 +3,13 @@ import type { Project } from '@/types/project';
 export const projectPath = (slug: string) => `/projects/${slug}/`;
 export const markdownPath = (project: Project) =>
   `${project.repository.replace('https://github.com/', 'https://raw.githubusercontent.com/')}/${encodeURIComponent(project.branch)}/README.md`;
-export interface MarkdownResult {
+interface MarkdownResult {
   source: string;
   error: boolean;
 }
 const pending = new Map<string, Promise<MarkdownResult>>();
 const key = (project: Project) =>
   `${markdownPath(project)}:${project.readme_blob_sha}`;
-
-export function primeMarkdown(project: Project, source: string) {
-  pending.set(key(project), Promise.resolve({ source, error: false }));
-}
 
 export function loadMarkdown(project: Project): Promise<MarkdownResult> {
   let promise = pending.get(key(project));

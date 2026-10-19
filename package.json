@@ -15,8 +15,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "node --import tsx --test tests/markdown.test.ts tests/site-data.test.ts tests/i18n.test.ts",
-    "test:e2e": "playwright test",
-    "test:build": "node --import tsx --test tests/build.test.ts"
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "github-slugger": "^2.0.0",

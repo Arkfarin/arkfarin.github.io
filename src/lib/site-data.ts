@@ -1,7 +1,7 @@
 import type { SiteData, SiteLink } from '../types/site';
-import type { Project, ProjectAsset } from '../types/project';
+import type { Project } from '../types/project';
 
-export const SITE_DATA_URL =
+const SITE_DATA_URL =
   'https://gist.github.com/Arkfarin/1a4b2ba90dde5629ace2f9330522f0cd/raw';
 // gist.github.com's redirect lacks CORS headers; its raw destination allows browser requests.
 export const SITE_DATA_RAW_URL = SITE_DATA_URL.replace(
@@ -117,22 +117,6 @@ export function parseSiteData(source: string): SiteData {
     const repository = webUrl(item.repository).replace(/\/$/, '');
     if (!/^https:\/\/github\.com\/[\w.-]+\/[\w.-]+$/.test(repository))
       throw new Error(`Invalid GitHub repository: ${slug}`);
-    const assets: Record<string, ProjectAsset> = {};
-    if (item.assets)
-      for (const [key, value] of Object.entries(record(item.assets))) {
-        const asset = record(value);
-        const src = text(asset.src);
-        if (!/^assets\/[\w./-]+$/.test(src) || src.includes('..'))
-          throw new Error(`Invalid local asset: ${src}`);
-        assets[key] = { src };
-        for (const size of ['width', 'height'] as const) {
-          if (asset[size] !== undefined) {
-            if (typeof asset[size] !== 'number' || asset[size] <= 0)
-              throw new Error(`Invalid asset ${size}`);
-            assets[key][size] = asset[size];
-          }
-        }
-      }
     return {
       slug,
       title: text(item.title),
@@ -147,7 +131,6 @@ export function parseSiteData(source: string): SiteData {
       language: item.language === undefined ? undefined : text(item.language),
       readme_blob_sha:
         typeof item.readme_blob_sha === 'string' ? item.readme_blob_sha : '',
-      ...(item.assets ? { assets } : {}),
     };
   });
   return {

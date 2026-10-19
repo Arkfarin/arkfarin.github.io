@@ -4,8 +4,6 @@ import type { Project } from '@/types/project';
 import { resolveMarkdownUrl } from '@/lib/markdown/links';
 import styles from './MarkdownRenderer.module.css';
 
-const assetBase = import.meta.env.BASE_URL;
-
 type Props = ComponentPropsWithoutRef<'picture'> & {
   node?: Element;
   project: Project;
@@ -42,7 +40,6 @@ export function MarkdownPicture({ node, project, children, ...props }: Props) {
               String(source.properties.srcSet),
               project,
               true,
-              assetBase,
             )}
             alt={alt}
             width={Number(fallback.properties.width) || undefined}

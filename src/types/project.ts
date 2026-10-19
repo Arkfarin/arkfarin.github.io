@@ -1,9 +1,3 @@
-export interface ProjectAsset {
-  src: string;
-  width?: number;
-  height?: number;
-}
-
 export interface Project {
   slug: string;
   title: string;
@@ -15,5 +9,4 @@ export interface Project {
   branch: string;
   readme_blob_sha: string;
   language?: string;
-  assets?: Partial<Record<string, ProjectAsset>>;
 }

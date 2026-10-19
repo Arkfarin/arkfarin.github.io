@@ -139,10 +139,6 @@
   display: inline-block;
   vertical-align: middle;
 }
-.project-image {
-  border: 1px solid var(--line);
-  border-radius: 3px;
-}
 .markdown-body picture {
   display: block;
 }

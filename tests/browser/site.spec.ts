@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { readFile } from 'node:fs/promises';
-import { mockData, ready } from './fixtures';
+import { mockData, ready, markdown } from './fixtures';
 test.beforeEach(async ({ page }) => {
   await mockData(page);
 });
@@ -9,7 +9,6 @@ test.beforeEach(async ({ page }) => {
 test('routes, original Markdown, code copying, contents and history', async ({
   page,
   context,
-  request,
 }) => {
   const errors: string[] = [];
   page.on('pageerror', (error) => errors.push(error.message));
@@ -19,17 +18,17 @@ test('routes, original Markdown, code copying, contents and history', async ({
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
   await page.goto('/');
   await ready(page);
-  await page.getByRole('link', { name: 'Открыть проект KIYORA' }).click();
-  await expect(page).toHaveURL(/\/projects\/kiyora\/$/);
+  await page.getByRole('link', { name: 'Открыть проект Alpha' }).click();
+  await expect(page).toHaveURL(/\/projects\/alpha\/$/);
   await expect(
-    page.getByRole('heading', { name: 'KIYORA', exact: true }),
+    page.getByRole('heading', { name: 'Alpha', exact: true }),
   ).toBeVisible();
   await page
     .getByRole('button', { name: 'Скопировать блок кода' })
     .first()
     .click();
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-    'uv run kiyora\n',
+    'npm run example\n',
   );
   await expect(
     page.getByRole('button', { name: 'Скопировать блок кода' }).first(),
@@ -43,32 +42,23 @@ test('routes, original Markdown, code copying, contents and history', async ({
   const downloading = page.waitForEvent('download');
   await page.getByRole('link', { name: 'Скачать .md' }).click();
   const download = await downloading;
-  expect(await readFile((await download.path())!, 'utf8')).toBe(
-    await readFile('content/projects/kiyora.md', 'utf8'),
-  );
+  expect(await readFile((await download.path())!, 'utf8')).toBe(markdown);
   await page
     .getByRole('navigation', { name: 'Другие проекты' })
-    .getByRole('link', { name: /Luminesk/ })
+    .getByRole('link', { name: /Beta/ })
     .click();
   await expect(
-    page.getByRole('heading', { name: 'Luminesk CLI', exact: true }),
+    page.getByRole('heading', { name: 'Beta', exact: true }),
   ).toBeVisible();
   await page.goBack();
   await expect(
-    page.getByRole('heading', { name: 'KIYORA', exact: true }),
+    page.getByRole('heading', { name: 'Alpha', exact: true }),
   ).toBeVisible();
-  for (const slug of ['kiyora', 'luminesk']) {
-    const response = await request.get(`/projects/${slug}/README.md`);
-    expect(response.ok()).toBeTruthy();
-    expect(await response.text()).toBe(
-      await readFile(`content/projects/${slug}.md`, 'utf8'),
-    );
-  }
   await page.goto('/projects/missing/');
   await expect(
     page.getByRole('heading', { name: /Страница не найдена/ }),
   ).toBeVisible();
-  await page.goto('/projects/kiyora/unexpected');
+  await page.goto('/projects/alpha/unexpected');
   await expect(
     page.getByRole('heading', { name: /Страница не найдена/ }),
   ).toBeVisible();
@@ -87,16 +77,16 @@ test('theme follows the system until overridden, persists and updates the logo',
   await page.getByRole('button', { name: 'Включить тёмную тему' }).click();
   await page.reload();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-  await page.goto('/projects/luminesk/');
-  const logo = page.getByRole('img', { name: 'Luminesk-CLI', exact: true });
+  await page.goto('/projects/beta/');
+  const logo = page.getByRole('img', { name: 'Example logo', exact: true });
   await logo.scrollIntoViewIfNeeded();
   await expect
     .poll(() => logo.evaluate((img: HTMLImageElement) => img.currentSrc))
-    .toContain('/docs/static/img/logo-with-cli.svg');
+    .toContain('/logo-dark.svg');
   await page.getByRole('button', { name: 'Включить светлую тему' }).click();
   await expect
     .poll(() => logo.evaluate((img: HTMLImageElement) => img.currentSrc))
-    .toContain('/docs/static/img/logo-with-cli-dark.svg');
+    .toContain('/logo-light.svg');
 });
 
 test('mobile navigation closes with Escape, outside click, link and breakpoint', async ({
@@ -125,7 +115,7 @@ test('mobile navigation closes with Escape, outside click, link and breakpoint',
   await page.setViewportSize({ width: 1100, height: 900 });
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(menu).toHaveAttribute('aria-expanded', 'false');
-  await page.goto('/projects/kiyora/');
+  await page.goto('/projects/alpha/');
   const toc = page.locator('details').first();
   await expect(toc).not.toHaveAttribute('open');
   await toc.locator('summary').click();
@@ -148,8 +138,8 @@ for (const theme of ['light', 'dark'] as const) {
       for (const route of [
         '/',
         '/projects/',
-        '/projects/kiyora/',
-        '/projects/luminesk/',
+        '/projects/alpha/',
+        '/projects/beta/',
       ]) {
         await page.goto(route);
         await ready(page);
@@ -172,9 +162,9 @@ for (const theme of ['light', 'dark'] as const) {
         }
       }
     }
-    await page.goto('/projects/kiyora/');
+    await page.goto('/projects/alpha/');
     const screenshot = page.getByRole('img', {
-      name: 'Экран текущей композиции',
+      name: 'Example logo',
     });
     await screenshot.scrollIntoViewIfNeeded();
     await expect
@@ -216,17 +206,17 @@ test('clipboard fallback, keyboard focus and reduced motion', async ({
       .locator('#hero-title')
       .evaluate((el) => getComputedStyle(el).animationName),
   ).toBe('none');
-  await page.getByRole('button', { name: 'Скопировать MLBB' }).click();
+  await page.getByRole('button', { name: 'Скопировать Game ID' }).click();
   await expect(page.locator('#links').getByRole('status')).toHaveText(
-    'Не удалось скопировать. Выделите значение: 123456789 (1234)',
+    'Не удалось скопировать. Выделите значение: 1234 (56)',
   );
-  await page.goto('/projects/kiyora/');
+  await page.goto('/projects/alpha/');
   await page
     .getByRole('button', { name: 'Скопировать блок кода' })
     .first()
     .click();
   expect(await page.evaluate(() => getSelection()?.toString())).toBe(
-    'uv run kiyora',
+    'npm run example',
   );
 });
 
@@ -236,11 +226,9 @@ test('static HTML contains content without JavaScript; home does not load Markdo
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const staticPage = await context.newPage();
-  await staticPage.goto('http://127.0.0.1:4173/projects/kiyora/');
-  await expect(
-    staticPage.getByRole('heading', { name: 'KIYORA', exact: true }),
-  ).toBeVisible();
-  await expect(staticPage.locator('article')).toContainText('Quiet Precision');
+  await staticPage.goto('http://127.0.0.1:4173/');
+  await expect(staticPage.locator('#hero-title')).toHaveText('ARKFARIN');
+  await expect(staticPage.locator('#projects')).toBeVisible();
   await context.close();
   const scripts: string[] = [];
   page.on('request', (request) => {
@@ -249,7 +237,7 @@ test('static HTML contains content without JavaScript; home does not load Markdo
   await page.goto('/');
   await ready(page);
   expect(
-    scripts.some((url) => /\/(Project|kiyora|luminesk)-/.test(url)),
+    scripts.some((url) => /\/(Project|alpha|beta)-/.test(url)),
   ).toBeFalsy();
   const title = page.locator('#hero-title');
   await expect(title).toBeVisible();

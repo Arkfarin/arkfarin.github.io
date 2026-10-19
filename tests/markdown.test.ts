@@ -15,11 +15,7 @@ import {
 import { resolveMarkdownUrl } from '../src/lib/markdown/links';
 import { markdownSchema } from '../src/lib/markdown/plugins';
 import { rehypeCodeHighlight } from '../src/lib/markdown/highlight';
-import { readFileSync } from 'node:fs';
-import { parseSiteData } from '../src/lib/site-data';
-const catalog = parseSiteData(
-  readFileSync('tests/fixtures/site.gist', 'utf8'),
-).projects;
+import { siteData } from './fixtures/site-data';
 
 const render = (markdown: string) =>
   String(
@@ -69,33 +65,15 @@ test('raw README HTML is preserved and sanitized before custom plugins', () => {
   assert.ok(!html.includes('javascript:'));
 });
 
-test('repository paths, local assets, fragments and external links resolve correctly', () => {
-  const project = {
-    ...catalog[0],
-    assets: {
-      'docs/screenshots/now-playing.png': { src: 'assets/kiyora.webp' },
-    },
-  };
+test('repository paths, fragments and external links resolve correctly', () => {
+  const project = siteData.projects[0];
   assert.equal(
-    resolveMarkdownUrl('docs/screenshots/now-playing.png', project, true),
-    '/assets/kiyora.webp',
-  );
-  assert.equal(
-    resolveMarkdownUrl(
-      'docs/screenshots/now-playing.png',
-      project,
-      true,
-      '/portfolio/',
-    ),
-    '/portfolio/assets/kiyora.webp',
-  );
-  assert.equal(
-    resolveMarkdownUrl('docs/VALIDATION.md#results', project),
-    'https://github.com/Arkfarin/KIYORA/blob/main/docs/VALIDATION.md#results',
+    resolveMarkdownUrl('docs/guide.md#results', project),
+    'https://github.com/example/alpha/blob/main/docs/guide.md#results',
   );
   assert.equal(
     resolveMarkdownUrl('./images/test.png', project, true),
-    'https://raw.githubusercontent.com/Arkfarin/KIYORA/main/images/test.png',
+    'https://raw.githubusercontent.com/example/alpha/main/images/test.png',
   );
   assert.equal(resolveMarkdownUrl('#запуск', project), '#запуск');
   assert.equal(
@@ -103,9 +81,9 @@ test('repository paths, local assets, fragments and external links resolve corre
     'https://example.com/a',
   );
   assert.equal(resolveMarkdownUrl('javascript:alert(1)', project), '');
-  assert.equal(omitRepeatedTitle('# KIYORA\n\nBody', 'KIYORA'), 'Body');
+  assert.equal(omitRepeatedTitle('# Alpha\n\nBody', 'Alpha'), 'Body');
   assert.equal(
-    omitRepeatedTitle('# Different\n\nBody', 'KIYORA'),
+    omitRepeatedTitle('# Different\n\nBody', 'Alpha'),
     '# Different\n\nBody',
   );
 });
