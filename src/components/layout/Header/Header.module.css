@@ -46,19 +46,8 @@
   flex-direction: column;
   gap: var(--space-6);
 }
-.rail-github {
-  font-size: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 .menu-toggle {
   display: none;
-}
-@media (hover: hover) {
-  .rail-github:hover {
-    color: var(--accent);
-  }
 }
 @media (min-width: 1700px) {
   .brand {
@@ -100,9 +89,6 @@
     flex-direction: row;
     gap: 0;
   }
-  .rail-github {
-    display: none;
-  }
   .menu-toggle {
     display: flex;
     flex-direction: column;
@@ -128,5 +114,13 @@
   }
   .skip-link {
     left: 20px;
+  }
+}
+@media (max-width: 380px) {
+  .rail {
+    padding-inline: 12px;
+  }
+  .brand {
+    font-size: 22px;
   }
 }

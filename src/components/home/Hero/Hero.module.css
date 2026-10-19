@@ -5,23 +5,6 @@
   flex-direction: column;
   container-type: inline-size;
 }
-.hero-top {
-  margin: 0 var(--pad);
-  padding: 29px 0 25px;
-  border-bottom: 1px solid var(--line);
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  font-size: 13px;
-  color: var(--muted);
-}
-.hero-top a {
-  color: var(--fg);
-  font-weight: 700;
-}
-.hero-top a span {
-  padding-left: 15px;
-}
 .hero-wordmark {
   position: relative;
   margin: clamp(52px, 7.5vh, 100px) 0 0;
@@ -64,6 +47,13 @@
 .hero-intro h2:not(:lang(ru)) {
   overflow-wrap: anywhere;
 }
+.hero-motto {
+  margin-top: var(--space-6);
+  font-size: clamp(12px, 1vw, 14px);
+  line-height: 1.6;
+  color: var(--muted);
+  text-wrap: balance;
+}
 .hero-description {
   padding-top: 5px;
   max-width: 440px;
@@ -80,28 +70,6 @@
   gap: 23px;
   margin-top: 28px;
 }
-.hero-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto var(--pad) 0;
-  padding: var(--space-6) 0 27px;
-  border-top: 1px solid var(--line);
-  font-size: 12px;
-  color: var(--muted);
-  gap: 20px;
-}
-.scroll-cue {
-  display: flex;
-  align-items: center;
-  gap: 26px;
-  color: var(--fg);
-}
-.down-arrow {
-  font-family: Arial, sans-serif;
-  font-size: 29px;
-  line-height: 1;
-}
 @media (min-width: 1700px) {
   .hero-description p {
     font-size: 18px;
@@ -111,10 +79,6 @@
   }
   .hero-intro {
     padding-top: 70px;
-  }
-  .hero-bottom {
-    padding-top: 30px;
-    padding-bottom: 35px;
   }
 }
 @media (max-width: 1100px) {
@@ -140,14 +104,6 @@
   .hero {
     min-height: calc(100svh - 72px);
     min-height: max(700px, calc(100svh - 72px));
-  }
-  .hero-top {
-    font-size: 11px;
-    padding: 22px 0 20px;
-    gap: var(--space-3);
-  }
-  .hero-top a span {
-    padding-left: 6px;
   }
   .hero-wordmark {
     margin-top: 55px;
@@ -188,24 +144,8 @@
     font-size: 11px;
     gap: 10px;
   }
-  .hero-bottom {
-    font-size: 10px;
-    padding: 23px 0;
-  }
-  .scroll-cue {
-    gap: 13px;
-  }
-  .scroll-cue > span:first-child {
-    display: none;
-  }
-  .down-arrow {
-    font-size: 26px;
-  }
 }
 @media (max-width: 380px) {
-  .hero-top {
-    font-size: 10px;
-  }
   .hero-wordmark {
     margin-top: 44px;
   }
@@ -214,9 +154,5 @@
   }
   .hero-actions {
     gap: var(--space-4);
-  }
-  .hero-bottom > span {
-    max-width: 230px;
-    line-height: 1.7;
   }
 }

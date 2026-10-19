@@ -2,6 +2,15 @@ import { useI18n } from '@/hooks/useI18n';
 import { isLocale, locales, localeNames } from '@/i18n/messages';
 import styles from './LanguageSelect.module.css';
 
+const localeFlags = {
+  ru: '🇷🇺',
+  en: '🇬🇧',
+  uk: '🇺🇦',
+  ja: '🇯🇵',
+  zh: '🇨🇳',
+  ky: '🇰🇬',
+};
+
 export function LanguageSelect() {
   const { locale, t, setLanguage } = useI18n();
   return (
@@ -21,7 +30,7 @@ export function LanguageSelect() {
             lang={value}
             title={localeNames[value]}
           >
-            {value.toUpperCase()}
+            {localeNames[value]} {localeFlags[value]}
           </option>
         ))}
       </select>

@@ -21,9 +21,6 @@ function HeaderMenu() {
       <div className={styles['rail-bottom']}>
         <LanguageSelect />
         <ThemeToggle />
-        <Link className={styles['rail-github']} to="/projects/">
-          {t('navProjects')} <span aria-hidden="true">↗</span>
-        </Link>
       </div>
       <button
         ref={buttonRef}

@@ -2,6 +2,7 @@ import { useI18n } from '@/hooks/useI18n';
 import type { ReactNode } from 'react';
 import type { SiteLink as LinkData } from '@/types/site';
 import { useClipboard } from '@/hooks/useClipboard';
+import ui from '@/components/ui/Primitives.module.css';
 import styles from './SiteLink.module.css';
 
 export function SiteLink({
@@ -13,8 +14,10 @@ export function SiteLink({
   children: ReactNode;
   className?: string;
 }) {
-  const { t } = useI18n();
-  const { copy, status } = useClipboard();
+  const { locale, t } = useI18n();
+  const { copy, status } = useClipboard(2000);
+  const isCopied = status === 'copied';
+  const copiedLabel = `${t('copied').toLocaleUpperCase(locale)}!`;
   if (!link.copyable)
     return (
       <a
@@ -30,14 +33,21 @@ export function SiteLink({
     <>
       <button
         type="button"
-        className={className}
-        aria-label={t('copyValue', { value: link.title })}
+        className={[className, styles.copyable].filter(Boolean).join(' ')}
+        aria-label={
+          isCopied ? copiedLabel : t('copyValue', { value: link.title })
+        }
+        disabled={status === 'copying' || isCopied}
+        data-copied={isCopied}
         onClick={() => void copy(link.value)}
       >
-        {children}
+        {isCopied ? copiedLabel : children}
       </button>
-      <span className={styles.feedback} role="status">
-        {status === 'copied'
+      <span
+        className={status === 'failed' ? styles.feedback : ui['sr-only']}
+        role="status"
+      >
+        {isCopied
           ? t('copiedName', { title: link.title })
           : status === 'failed'
             ? t('copyFailed', { value: link.value })

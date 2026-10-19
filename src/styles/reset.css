@@ -23,6 +23,10 @@ button:focus-visible,
   outline: 3px solid var(--accent);
   outline-offset: 6px;
 }
+/* Route navigation focuses these containers without outlining whole sections. */
+:where(main, section)[tabindex='-1']:focus {
+  outline: none;
+}
 button:disabled {
   cursor: default;
 }

@@ -14,12 +14,12 @@ for (const locale of locales) {
     await ready(page);
     const select = page.getByRole('combobox');
     await expect(select.locator('option')).toHaveText([
-      'RU',
-      'EN',
-      'UK',
-      'JA',
-      'ZH',
-      'KY',
+      'Русский 🇷🇺',
+      'English 🇬🇧',
+      'Українська 🇺🇦',
+      '日本語 🇯🇵',
+      '简体中文 🇨🇳',
+      'Кыргызча 🇰🇬',
     ]);
     await select.selectOption(locale);
     await expect(page.locator('html')).toHaveAttribute('lang', locale);

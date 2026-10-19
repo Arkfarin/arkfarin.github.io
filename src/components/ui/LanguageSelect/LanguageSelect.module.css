@@ -1,11 +1,12 @@
 .control {
   position: relative;
+  margin-inline: -12px;
 }
 .control select {
   appearance: none;
   width: 100%;
   min-height: 44px;
-  padding: 10px 26px 10px 10px;
+  padding: 10px 18px 10px 6px;
   border: 1px solid var(--line);
   border-radius: 0;
   font: inherit;
@@ -17,7 +18,7 @@
 }
 .control span {
   position: absolute;
-  right: 10px;
+  right: 6px;
   top: 9px;
   pointer-events: none;
   color: var(--muted);
@@ -26,9 +27,17 @@
   outline: 3px solid var(--accent);
   outline-offset: 4px;
 }
+@media (min-width: 761px) and (max-width: 1100px) {
+  .control select {
+    font-size: 11px;
+    padding-inline: 4px 16px;
+  }
+}
 @media (max-width: 760px) {
   .control {
-    width: 60px;
+    width: 128px;
+    margin-inline: 0;
+    flex-shrink: 0;
   }
   .control select {
     border: 0;

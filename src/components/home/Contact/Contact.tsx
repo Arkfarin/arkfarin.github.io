@@ -5,7 +5,6 @@ import { SiteLink } from '@/components/ui/SiteLink/SiteLink';
 import styles from './Contact.module.css';
 import { Footer } from '@/components/layout/Footer/Footer';
 import { SocialLinks } from '../SocialLinks/SocialLinks';
-import { ContactCopy } from './ContactCopy';
 import { useReveal } from '@/hooks/useReveal';
 
 export function Contact() {
@@ -57,9 +56,6 @@ export function Contact() {
                 : t('writeTo', { title: main.title })}{' '}
               <span aria-hidden="true">{main.copyable ? '⧉' : '↗'}</span>
             </SiteLink>
-          )}
-          {main && !main.copyable && main.alt && (
-            <ContactCopy value={main.alt} />
           )}
         </div>
         {data.links.contacts.length ? (

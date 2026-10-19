@@ -216,9 +216,9 @@ test('clipboard fallback, keyboard focus and reduced motion', async ({
       .locator('#hero-title')
       .evaluate((el) => getComputedStyle(el).animationName),
   ).toBe('none');
-  await page.getByRole('button', { name: /Скопировать arkfarin/ }).click();
-  await expect(page.locator('#contact').getByRole('status')).toHaveText(
-    'Значение для копирования: arkfarin',
+  await page.getByRole('button', { name: 'Скопировать MLBB' }).click();
+  await expect(page.locator('#links').getByRole('status')).toHaveText(
+    'Не удалось скопировать. Выделите значение: 123456789 (1234)',
   );
   await page.goto('/projects/kiyora/');
   await page

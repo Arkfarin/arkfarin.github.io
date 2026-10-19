@@ -48,30 +48,6 @@
   letter-spacing: -0.04em;
   margin-bottom: 28px;
 }
-.copy-contact {
-  display: flex;
-  gap: 15px;
-  background: none;
-  padding: 17px 0;
-  font-size: 12px;
-  color: var(--muted);
-  text-align: left;
-  align-items: center;
-}
-.copy-contact span {
-  font-size: 18px;
-}
-.copy-feedback {
-  display: block;
-  font-size: 12px;
-  min-height: 20px;
-  color: var(--accent);
-}
-@media (hover: hover) {
-  .copy-contact:hover {
-    color: var(--accent);
-  }
-}
 @media (max-width: 1100px) {
   .contact.section-pad {
     padding-bottom: 0;
@@ -115,12 +91,6 @@
   .contact-intro p {
     font-size: 25px;
     margin-bottom: 22px;
-  }
-  .copy-contact {
-    font-size: 11px;
-  }
-  .copy-feedback:empty {
-    min-height: 0;
   }
 }
 @media (max-width: 380px) {

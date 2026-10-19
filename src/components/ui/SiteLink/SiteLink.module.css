@@ -1,3 +1,11 @@
+.copyable:disabled {
+  cursor: default;
+}
+.copyable:disabled[data-copied='true'] {
+  background: var(--red);
+  color: var(--on-red);
+  justify-content: center;
+}
 .feedback:not(:empty) {
   display: block;
   padding: 12px 0;

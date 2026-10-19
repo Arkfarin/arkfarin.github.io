@@ -39,11 +39,6 @@ export function About() {
           </p>
           <p>{t('aboutScript')}</p>
           <p>{t('aboutWork')}</p>
-          <div className={styles['interests']} aria-label={t('interests')}>
-            <span>Python</span>
-            <span>{t('automation')}</span>
-            <span>{t('experiments')}</span>
-          </div>
         </div>
       </div>
       <div data-reveal="ready" className={styles['offscreen']}>

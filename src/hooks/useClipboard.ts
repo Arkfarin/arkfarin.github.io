@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 
-export function useClipboard() {
-  const [status, setStatus] = useState<'idle' | 'copied' | 'failed'>('idle');
+export function useClipboard(successDuration = 4000) {
+  const [status, setStatus] = useState<
+    'idle' | 'copying' | 'copied' | 'failed'
+  >('idle');
   const timeout = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const mounted = useRef(false);
   useEffect(() => {
@@ -14,6 +16,7 @@ export function useClipboard() {
 
   async function copy(text: string) {
     clearTimeout(timeout.current);
+    setStatus('copying');
     let copied = false;
     try {
       await navigator.clipboard.writeText(text);
@@ -23,7 +26,10 @@ export function useClipboard() {
     }
     if (mounted.current) {
       setStatus(copied ? 'copied' : 'failed');
-      timeout.current = setTimeout(() => setStatus('idle'), 4000);
+      timeout.current = setTimeout(
+        () => setStatus('idle'),
+        copied ? successDuration : 4000,
+      );
     }
     return copied;
   }
