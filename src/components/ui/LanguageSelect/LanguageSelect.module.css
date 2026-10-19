@@ -1,0 +1,37 @@
+.control {
+  position: relative;
+}
+.control select {
+  appearance: none;
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 26px 10px 10px;
+  border: 1px solid var(--line);
+  border-radius: 0;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--fg);
+  background: var(--bg);
+  cursor: pointer;
+}
+.control span {
+  position: absolute;
+  right: 10px;
+  top: 9px;
+  pointer-events: none;
+  color: var(--muted);
+}
+.control select:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+@media (max-width: 760px) {
+  .control {
+    width: 60px;
+  }
+  .control select {
+    border: 0;
+    padding-left: 8px;
+  }
+}

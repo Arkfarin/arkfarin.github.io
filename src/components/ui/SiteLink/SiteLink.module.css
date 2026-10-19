@@ -1,0 +1,8 @@
+.feedback:not(:empty) {
+  display: block;
+  padding: 12px 0;
+  color: var(--accent);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+  user-select: text;
+}

@@ -1,0 +1,49 @@
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.header {
+  container-type: inline-size;
+  padding: 58px var(--pad) 64px;
+}
+.header h1:is(:lang(uk), :lang(ja), :lang(zh), :lang(ky)) {
+  font-family: Manrope, Arial, sans-serif;
+  font-size: clamp(36px, 10cqi, 144px);
+  letter-spacing: -0.04em;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.header h1 {
+  font-family: Display, Impact, sans-serif;
+  font-size: clamp(86px, 14vw, 210px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+  margin: 46px 0 20px;
+}
+.header p {
+  color: var(--muted);
+  font-size: clamp(16px, 2vw, 23px);
+}
+.catalog {
+  background: var(--project);
+  color: var(--project-text);
+  padding: 64px var(--pad);
+  flex: 1;
+}
+.footer {
+  padding: 0 var(--pad);
+}
+@media (max-width: 760px) {
+  .header {
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
+  .header h1 {
+    margin-top: 34px;
+  }
+  .catalog {
+    padding-block: 36px;
+  }
+}

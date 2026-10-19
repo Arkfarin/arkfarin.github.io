@@ -1,0 +1,94 @@
+:root {
+  --font-mono:
+    'JetBrains Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --bg: #f3f2ee;
+  --fg: #19191b;
+  --muted: #686762;
+  --line: #cecdc7;
+  --surface: #e7e6e0;
+  --red: #ff3154;
+  --accent: #d61b3d;
+  --rail: 112px;
+  --pad: clamp(28px, 4.6vw, 88px);
+  --project: #1b1c1f;
+  --project-text: #f1f0ec;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  color-scheme: light;
+  --ink: #19191b;
+  --on-red: #161719;
+  --code-bg: #eaeae6;
+  --syntax-keyword: #a62562;
+  --syntax-string: #276546;
+  --syntax-comment: #66655f;
+  --syntax-number: #215ca0;
+  --syntax-function: #6a3b9e;
+  --syntax-operator: #8a4a18;
+  --project-surface: #222326;
+  --project-border: #424347;
+  --project-muted: #b8b9b4;
+  --project-description: #c5c6c1;
+  --project-hover: #292a2e;
+  --project-accent: #ff6a83;
+  --project-heading: #9b9c98;
+  --project-link: #b6b7b2;
+  --project-divider: #737471;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --radius-sm: 4px;
+  --radius-code: 5px;
+  --duration-fast: 0.2s;
+  --duration-theme: 0.25s;
+  --duration-reveal: 0.7s;
+  --z-navigation: 50;
+  --z-skip-link: 200;
+}
+:root[data-theme='dark'] {
+  --bg: #141517;
+  --fg: #f0efeb;
+  --muted: #a9a9a3;
+  --line: #36373a;
+  --surface: #202124;
+  --accent: #ff526e;
+  --project: #0e0f11;
+  --project-text: #f1f0ec;
+  color-scheme: dark;
+  --code-bg: #1c1e22;
+  --syntax-keyword: #ff8fba;
+  --syntax-string: #9cd9b1;
+  --syntax-comment: #a5aaa6;
+  --syntax-number: #9abfff;
+  --syntax-function: #cfabff;
+  --syntax-operator: #e8b277;
+}
+@media (min-width: 1700px) {
+  :root {
+    --rail: 140px;
+  }
+}
+@media (max-width: 1100px) {
+  :root {
+    --rail: 100px;
+    --pad: 35px;
+  }
+}
+@media (max-width: 760px) {
+  :root {
+    --rail: 0px;
+    --pad: 24px;
+  }
+}
+@media (max-width: 380px) {
+  :root {
+    --pad: 19px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0s;
+    --duration-theme: 0s;
+    --duration-reveal: 0s;
+  }
+}

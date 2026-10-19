@@ -1,0 +1,34 @@
+{
+  "links": {
+    "contacts": { // Блок #contact
+      ["title": "Telegram", "value": "https://telegram.me/arkfarin", "alt": "arkfarin", "main": true], // main - это та самая ссылка под "Есть вопрос, идея или что-то интересное?". Оно может быть лишь одной
+      ["title": "VK", "value": "https://vk.com/arkfarin", "alt": "arkfarin"]
+    },
+    "others": { // Блок #links
+      ["title": "OSU!", "value": "https://osu.ppy.sh/users/38339524"],
+      ["title": "Steam", "value": "https://steamcommunity.com/id/arkfarin"],
+      ["title": "MLBB", "value": "123456789 (1234)", "copyable": true] // copyable - это значит что это не ссылка, и вместо открытия надо скопировать значение
+    }
+  },
+  "projects": [
+    {
+      "slug": "kiyora",
+      "title": "KIYORA",
+      "description": "Локальный музыкальный плеер для Linux. Своя коллекция, очередь и спокойный интерфейс.",
+      "technologies": ["Python", "Qt Quick"],
+      "repository": "https://github.com/Arkfarin/KIYORA",
+      "branch": "main",
+      "readme_blob_sha": "6f3104d2791aa68ce81994cf3b4c823e608ec0a5"
+    },
+    {
+      "slug": "luminesk",
+      "title": "Luminesk CLI",
+      "description": "Установка и управление серверами Minecraft Java и Bedrock через единый CLI.",
+      "technologies": ["Python", "Docker"],
+      "repository": "https://github.com/task-v1/luminesk-cli",
+      "branch": "main",
+      "readme_blob_sha": "8f690b0fca8ca1bd7d7c6621947f1d6659092ed5"
+    }
+    // В главной странице нужно отобразить лишь 2 МАКСИМУМ! Если проектов больше, снизу добавить кнопку "Остальные проект", который ведет в новый /projects
+  ]
+}

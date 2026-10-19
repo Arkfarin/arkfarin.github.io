@@ -1,0 +1,29 @@
+.section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12%;
+  border-bottom: 1px solid var(--line);
+}
+.intro h2 {
+  max-width: 9em;
+  letter-spacing: -0.045em;
+}
+.intro p {
+  margin-top: 24px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+@media (max-width: 1100px) {
+  .section {
+    gap: 8%;
+  }
+}
+@media (max-width: 760px) {
+  .section {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .intro p {
+    margin-top: 16px;
+  }
+}

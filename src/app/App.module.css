@@ -1,0 +1,35 @@
+.main {
+  margin-left: var(--rail);
+  overflow: clip;
+}
+@media (max-width: 760px) {
+  .main {
+    margin: 72px 0 0;
+  }
+}
+.loading {
+  padding: 80px var(--pad);
+}
+.failure {
+  margin: 24px 0;
+  line-height: 1.6;
+}
+.error {
+  margin-left: var(--rail);
+  padding: 20px var(--pad);
+  background: var(--surface);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  font-size: 14px;
+}
+.error button {
+  color: var(--accent);
+  text-decoration: underline;
+  background: none;
+}
+@media (max-width: 760px) {
+  .error {
+    margin: 72px 0 -72px;
+  }
+}

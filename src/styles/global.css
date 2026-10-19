@@ -1,0 +1,17 @@
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 24px;
+}
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 88px;
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  transition:
+    background-color var(--duration-theme),
+    color var(--duration-theme);
+}

@@ -1,0 +1,130 @@
+.contact.section-pad {
+  padding-bottom: 0;
+}
+.contact .section-top {
+  margin-bottom: 35px;
+}
+.contact-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-6);
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 40px;
+  margin-bottom: 55px;
+}
+.contact-top h2 {
+  font-family: Manrope, Arial, sans-serif;
+  font-size: clamp(54px, 9.1vw, 155px);
+  line-height: 1.05;
+  letter-spacing: -0.09em;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.contact-top h2:not(:lang(ru)) {
+  font-size: clamp(32px, 6.6vw, 112px);
+  letter-spacing: -0.04em;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  min-width: 0;
+}
+.contact-arrow {
+  font-family: Arial, sans-serif;
+  font-size: clamp(65px, 10vw, 160px);
+  line-height: 0.8;
+  color: var(--red);
+  font-weight: 400;
+  margin-right: 7px;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12%;
+  padding-bottom: 100px;
+}
+.contact-intro p {
+  font-size: clamp(22px, 2.1vw, 34px);
+  line-height: 1.4;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+}
+.copy-contact {
+  display: flex;
+  gap: 15px;
+  background: none;
+  padding: 17px 0;
+  font-size: 12px;
+  color: var(--muted);
+  text-align: left;
+  align-items: center;
+}
+.copy-contact span {
+  font-size: 18px;
+}
+.copy-feedback {
+  display: block;
+  font-size: 12px;
+  min-height: 20px;
+  color: var(--accent);
+}
+@media (hover: hover) {
+  .copy-contact:hover {
+    color: var(--accent);
+  }
+}
+@media (max-width: 1100px) {
+  .contact.section-pad {
+    padding-bottom: 0;
+  }
+  .contact-top h2 {
+    font-size: 8.9vw;
+  }
+  .contact-arrow {
+    font-size: 10vw;
+  }
+  .contact-grid {
+    gap: 8%;
+    padding-bottom: 70px;
+  }
+}
+@media (max-width: 760px) {
+  .contact.section-pad {
+    padding-bottom: 0;
+  }
+  .contact .section-top {
+    margin-bottom: 30px;
+  }
+  .contact-top {
+    gap: var(--space-3);
+    padding-bottom: 25px;
+    margin-bottom: 30px;
+  }
+  .contact-top h2 {
+    font-size: 12vw;
+    letter-spacing: -0.075em;
+  }
+  .contact-arrow {
+    font-size: 14vw;
+    margin-right: 0;
+  }
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding-bottom: 55px;
+  }
+  .contact-intro p {
+    font-size: 25px;
+    margin-bottom: 22px;
+  }
+  .copy-contact {
+    font-size: 11px;
+  }
+  .copy-feedback:empty {
+    min-height: 0;
+  }
+}
+@media (max-width: 380px) {
+  .contact-top h2 {
+    font-size: 11.5vw;
+  }
+}

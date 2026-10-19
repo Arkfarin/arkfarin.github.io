@@ -1,0 +1,11 @@
+dist
+.ssr
+node_modules
+public/assets
+content/projects
+package-lock.json
+pnpm-lock.yaml
+test-results
+playwright-report
+.agents
+skills-lock.json

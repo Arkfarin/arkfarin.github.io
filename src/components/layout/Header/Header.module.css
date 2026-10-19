@@ -1,0 +1,132 @@
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 140px;
+  background: var(--fg);
+  color: var(--bg);
+  padding: var(--space-4);
+  z-index: var(--z-skip-link);
+  transform: translateY(-150%);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+.rail {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--rail);
+  z-index: var(--z-navigation);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-right: 1px solid var(--line);
+  background: var(--bg);
+  transition:
+    background var(--duration-theme),
+    border-color var(--duration-theme);
+}
+.brand {
+  display: block;
+  font-family: Display, Impact, sans-serif;
+  font-weight: 800;
+  font-size: 31px;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  padding: 33px 22px 28px;
+}
+.brand > span {
+  display: block;
+}
+.brand-dot {
+  color: var(--red);
+}
+.rail-bottom {
+  padding: 0 18px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.rail-github {
+  font-size: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.menu-toggle {
+  display: none;
+}
+@media (hover: hover) {
+  .rail-github:hover {
+    color: var(--accent);
+  }
+}
+@media (min-width: 1700px) {
+  .brand {
+    font-size: 38px;
+    padding-left: 26px;
+  }
+}
+@media (max-width: 1100px) {
+  .brand {
+    padding-left: 17px;
+    font-size: 29px;
+  }
+}
+@media (max-width: 760px) {
+  .rail {
+    height: 72px;
+    width: 100%;
+    inset: 0 0 auto;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 22px;
+  }
+  .brand {
+    font-size: 28px;
+    padding: 0;
+    line-height: 1;
+    display: flex;
+    letter-spacing: -0.025em;
+  }
+  .brand > span {
+    display: inline;
+  }
+  .rail-bottom {
+    padding: 0;
+    margin-left: auto;
+    flex-direction: row;
+    gap: 0;
+  }
+  .rail-github {
+    display: none;
+  }
+  .menu-toggle {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    margin-right: -10px;
+    padding: 11px;
+  }
+  .menu-toggle span {
+    height: 2px;
+    width: 22px;
+    background: var(--fg);
+    transition: transform var(--duration-theme);
+  }
+  .menu-toggle[aria-expanded='true'] span:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+  .menu-toggle[aria-expanded='true'] span:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+  .skip-link {
+    left: 20px;
+  }
+}
