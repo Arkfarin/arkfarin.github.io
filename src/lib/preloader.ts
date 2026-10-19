@@ -86,24 +86,13 @@ export function startPreloader() {
           [
             {
               transform: `translate(${source.left - final.left}px, ${source.top - final.top}px) scale(${source.width / final.width}, ${source.height / final.height})`,
+              color: getComputedStyle(document.documentElement)
+                .getPropertyValue('--red')
+                .trim(),
             },
-            { transform: 'none' },
+            { transform: 'none', color: type.color },
           ],
           1050,
-        );
-        const palette = getComputedStyle(document.documentElement);
-        const foreground = palette.getPropertyValue('--fg').trim();
-        // Stay legible in the dark theme until the red band is behind the word.
-        animations.push(
-          word.animate(
-            [
-              { color: palette.getPropertyValue('--red').trim(), offset: 0 },
-              { color: foreground, offset: 0.2 },
-              { color: foreground, offset: 0.7 },
-              { color: type.color, offset: 1 },
-            ],
-            { duration: 1050, easing: 'linear', fill: 'both' },
-          ),
         );
         const band = document.querySelector('[data-hero-band]');
         const intro = document.querySelector('[data-hero-intro]');
