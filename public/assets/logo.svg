@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1254" height="1254" viewBox="37.25 14 1254 1254" fill="none">
+  <title>ARKFARIN — faceted twin emblem</title>
+  <desc>Native vector reconstruction: two independent faceted forms, transparent apertures, editable paths and linear gradients. No raster content or external resources.</desc>
+  <defs>
+    <clipPath id="upper-silhouette-clip"><path clip-rule="evenodd" d="M146 892.5 C178.6 840 220.07 787.5 256.5 735 C294.29 683.33 327.55 631.67 373 580 C500.08 505 632.14 430 760.5 355 C895.47 279.83 1020.44 204.67 1165.5 129.5 C1094.1 201.33 1017.99 273.17 943.5 345 C869.08 417.67 788.95 490.33 707.5 563 L687.7 609.2 L490.3 754.8 L463.4 794.3 L257 843.5 Z M594.3 655.4 L608.2 635.8 L653.1 604.7 Q643.5 628.2 622.6 640.5 Z"/></clipPath>
+    <clipPath id="lower-silhouette-clip"><path clip-rule="evenodd" d="M232 1152.5 C261.28 1107 308.02 1061.5 345.5 1016 C387.93 970.5 424.66 925 476.5 879.5 C600.69 819 730.84 758.5 843.5 698 C964.44 637.5 1054.96 577 1182.5 516.5 C1129.66 576 1062.35 635.5 997.5 695 C933.09 754 862.68 813 790 872 Q775 908 754.3 936.9 L574.8 1045.1 L540.1 1077.4 L340 1117.3 Z M658.2 972.4 L671.6 955.8 L735.1 912.1 Q725.7 944.1 693.6 955.1 Z"/></clipPath>
+    <linearGradient id="upper-rear-recess-gradient" gradientUnits="userSpaceOnUse" x1="583.47" y1="684.39" x2="561.77" y2="659.77">
+      <stop offset="0.000" stop-color="#6a0218"/>
+      <stop offset="0.333" stop-color="#5b0317"/>
+      <stop offset="0.667" stop-color="#540417"/>
+      <stop offset="1.000" stop-color="#480010"/>
+    </linearGradient>
+    <linearGradient id="upper-rear-outer-rail-gradient" gradientUnits="userSpaceOnUse" x1="616.88" y1="665.43" x2="606.08" y2="652.75">
+      <stop offset="0.000" stop-color="#be0122"/>
+      <stop offset="0.500" stop-color="#d20227"/>
+      <stop offset="1.000" stop-color="#6d0115"/>
+    </linearGradient>
+    <linearGradient id="upper-rear-rail-lit-face-gradient" gradientUnits="userSpaceOnUse" x1="682.40" y1="604.98" x2="678.72" y2="595.97">
+      <stop offset="0.000" stop-color="#a3011d"/>
+      <stop offset="0.500" stop-color="#99001c"/>
+      <stop offset="1.000" stop-color="#8f021d"/>
+    </linearGradient>
+    <linearGradient id="upper-aperture-inner-wall-gradient" gradientUnits="userSpaceOnUse" x1="590.23" y1="654.80" x2="587.05" y2="651.10">
+      <stop offset="0.000" stop-color="#8f011a"/>
+      <stop offset="0.500" stop-color="#770118"/>
+      <stop offset="1.000" stop-color="#49000f"/>
+    </linearGradient>
+    <linearGradient id="upper-front-rim-gradient" gradientUnits="userSpaceOnUse" x1="450.81" y1="791.36" x2="420.65" y2="748.60">
+      <stop offset="0.000" stop-color="#ea022b"/>
+      <stop offset="0.333" stop-color="#e1022a"/>
+      <stop offset="0.667" stop-color="#c70126"/>
+      <stop offset="1.000" stop-color="#ab0120"/>
+    </linearGradient>
+    <linearGradient id="upper-front-recess-gradient" gradientUnits="userSpaceOnUse" x1="447.30" y1="749.72" x2="439.08" y2="736.08">
+      <stop offset="0.000" stop-color="#400314"/>
+      <stop offset="0.500" stop-color="#3d0312"/>
+      <stop offset="1.000" stop-color="#26040d"/>
+    </linearGradient>
+    <linearGradient id="upper-front-recess-inner-plane-gradient" gradientUnits="userSpaceOnUse" x1="407.04" y1="793.36" x2="386.17" y2="760.82">
+      <stop offset="0.000" stop-color="#80011a"/>
+      <stop offset="0.500" stop-color="#540317"/>
+      <stop offset="1.000" stop-color="#250310"/>
+    </linearGradient>
+    <linearGradient id="upper-left-chamfer-gradient" gradientUnits="userSpaceOnUse" x1="307.35" y1="685.11" x2="299.15" y2="679.15">
+      <stop offset="0.000" stop-color="#fa1b3a"/>
+      <stop offset="0.500" stop-color="#fd213e"/>
+      <stop offset="1.000" stop-color="#740000"/>
+    </linearGradient>
+    <linearGradient id="upper-back-edge-chamfer-gradient" gradientUnits="userSpaceOnUse" x1="496.20" y1="518.01" x2="493.04" y2="512.55">
+      <stop offset="0.000" stop-color="#ec253b"/>
+      <stop offset="0.333" stop-color="#ff2f4c"/>
+      <stop offset="0.667" stop-color="#af0016"/>
+      <stop offset="1.000" stop-color="#a9041a"/>
+    </linearGradient>
+    <linearGradient id="upper-top-plane-gradient-0" gradientUnits="userSpaceOnUse" x1="1099.32" y1="141.59" x2="131.64" y2="823.67">
+      <stop offset="0.000" stop-color="#fd303e"/>
+      <stop offset="0.250" stop-color="#fe3243"/>
+      <stop offset="0.500" stop-color="#fd3d50"/>
+      <stop offset="0.750" stop-color="#fd2e46"/>
+      <stop offset="1.000" stop-color="#fb4454"/>
+    </linearGradient>
+    <linearGradient id="upper-top-plane-gradient-1" gradientUnits="userSpaceOnUse" x1="1099.32" y1="141.59" x2="131.64" y2="823.67">
+      <stop offset="0.000" stop-color="#f72148"/>
+      <stop offset="0.250" stop-color="#fb374d"/>
+      <stop offset="0.500" stop-color="#fc4150"/>
+      <stop offset="0.750" stop-color="#fc1b38"/>
+      <stop offset="1.000" stop-color="#fe2d3e"/>
+    </linearGradient>
+    <linearGradient id="upper-top-plane-gradient-blend" gradientUnits="userSpaceOnUse" x1="660.67" y1="521.63" x2="599.92" y2="435.44"><stop stop-color="#000000"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <mask id="upper-top-plane-gradient-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254"><rect width="1254" height="1254" fill="url(#upper-top-plane-gradient-blend)"/></mask>
+    <linearGradient id="upper-front-main-plane-gradient-0" gradientUnits="userSpaceOnUse" x1="1094.82" y1="170.38" x2="292.65" y2="766.56">
+      <stop offset="0.000" stop-color="#dd2b44"/>
+      <stop offset="0.250" stop-color="#e9243f"/>
+      <stop offset="0.500" stop-color="#f81b38"/>
+      <stop offset="0.750" stop-color="#fd1334"/>
+      <stop offset="1.000" stop-color="#fe1232"/>
+    </linearGradient>
+    <linearGradient id="upper-front-main-plane-gradient-1" gradientUnits="userSpaceOnUse" x1="1094.82" y1="170.38" x2="292.65" y2="766.56">
+      <stop offset="0.000" stop-color="#ff3f4c"/>
+      <stop offset="0.250" stop-color="#ff2a43"/>
+      <stop offset="0.500" stop-color="#ff1537"/>
+      <stop offset="0.750" stop-color="#f51134"/>
+      <stop offset="1.000" stop-color="#f81536"/>
+    </linearGradient>
+    <linearGradient id="upper-front-main-plane-gradient-blend" gradientUnits="userSpaceOnUse" x1="579.48" y1="617.50" x2="519.50" y2="536.81"><stop stop-color="#000000"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <mask id="upper-front-main-plane-gradient-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254"><rect width="1254" height="1254" fill="url(#upper-front-main-plane-gradient-blend)"/></mask>
+    <linearGradient id="upper-long-side-plane-gradient-0" gradientUnits="userSpaceOnUse" x1="1142.51" y1="147.42" x2="576.88" y2="632.36">
+      <stop offset="0.000" stop-color="#c2022a"/>
+      <stop offset="0.250" stop-color="#d1032a"/>
+      <stop offset="0.500" stop-color="#e2052b"/>
+      <stop offset="0.750" stop-color="#ec082d"/>
+      <stop offset="1.000" stop-color="#e8082b"/>
+    </linearGradient>
+    <linearGradient id="upper-long-side-plane-gradient-1" gradientUnits="userSpaceOnUse" x1="1142.51" y1="147.42" x2="576.88" y2="632.36">
+      <stop offset="0.000" stop-color="#c3031f"/>
+      <stop offset="0.250" stop-color="#c70222"/>
+      <stop offset="0.500" stop-color="#cf0326"/>
+      <stop offset="0.750" stop-color="#d8052a"/>
+      <stop offset="1.000" stop-color="#d00126"/>
+    </linearGradient>
+    <linearGradient id="upper-long-side-plane-gradient-blend" gradientUnits="userSpaceOnUse" x1="830.30" y1="450.43" x2="790.13" y2="403.58"><stop stop-color="#000000"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <mask id="upper-long-side-plane-gradient-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254"><rect width="1254" height="1254" fill="url(#upper-long-side-plane-gradient-blend)"/></mask>
+    <linearGradient id="upper-side-root-facet-gradient" gradientUnits="userSpaceOnUse" x1="595.31" y1="622.33" x2="551.35" y2="594.20">
+      <stop offset="0.000" stop-color="#c50327"/>
+      <stop offset="0.500" stop-color="#b60324"/>
+      <stop offset="1.000" stop-color="#ac0222"/>
+    </linearGradient>
+    <linearGradient id="upper-front-lower-facet-gradient-0" gradientUnits="userSpaceOnUse" x1="500.01" y1="690.35" x2="152.27" y2="869.98">
+      <stop offset="0.000" stop-color="#b80426"/>
+      <stop offset="0.250" stop-color="#ba0426"/>
+      <stop offset="0.500" stop-color="#b30324"/>
+      <stop offset="0.750" stop-color="#ad0223"/>
+      <stop offset="1.000" stop-color="#a3001f"/>
+    </linearGradient>
+    <linearGradient id="upper-front-lower-facet-gradient-1" gradientUnits="userSpaceOnUse" x1="500.01" y1="690.35" x2="152.27" y2="869.98">
+      <stop offset="0.000" stop-color="#b1001b"/>
+      <stop offset="0.250" stop-color="#ae001f"/>
+      <stop offset="0.500" stop-color="#ac0324"/>
+      <stop offset="0.750" stop-color="#ab0423"/>
+      <stop offset="1.000" stop-color="#af0523"/>
+    </linearGradient>
+    <linearGradient id="upper-front-lower-facet-gradient-blend" gradientUnits="userSpaceOnUse" x1="315.04" y1="804.89" x2="294.06" y2="764.29"><stop stop-color="#000000"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <mask id="upper-front-lower-facet-gradient-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254"><rect width="1254" height="1254" fill="url(#upper-front-lower-facet-gradient-blend)"/></mask>
+    <linearGradient id="upper-shoulder-reflection-gradient" gradientUnits="userSpaceOnUse" x1="635.58" y1="528.20" x2="502.06" y2="496.31">
+      <stop offset="0.000" stop-color="#fd969b"/>
+      <stop offset="0.333" stop-color="#fd9ba1"/>
+      <stop offset="0.667" stop-color="#fc9da2"/>
+      <stop offset="1.000" stop-color="#fda9ad"/>
+    </linearGradient>
+    <linearGradient id="upper-shoulder-reflection-bright-gradient" gradientUnits="userSpaceOnUse" x1="486.30" y1="488.84" x2="474.03" y2="572.24">
+      <stop offset="0.000" stop-color="#fde7e6"/>
+      <stop offset="0.500" stop-color="#fdd8d9"/>
+      <stop offset="1.000" stop-color="#fcb6ba"/>
+    </linearGradient>
+    <linearGradient id="upper-front-reflection-gradient" gradientUnits="userSpaceOnUse" x1="444.75" y1="602.75" x2="312.24" y2="659.60">
+      <stop offset="0.000" stop-color="#fdd9da"/>
+      <stop offset="0.500" stop-color="#fcadb1"/>
+      <stop offset="1.000" stop-color="#fd8a91"/>
+    </linearGradient>
+    <linearGradient id="upper-front-reflection-edge-gradient" gradientUnits="userSpaceOnUse" x1="419.35" y1="620.28" x2="414.88" y2="616.31">
+      <stop offset="0.000" stop-color="#fd5d6b"/>
+      <stop offset="0.500" stop-color="#fc6571"/>
+      <stop offset="1.000" stop-color="#fcf4f0"/>
+    </linearGradient>
+    <linearGradient id="upper-tip-reflection-gradient" gradientUnits="userSpaceOnUse" x1="236.74" y1="825.73" x2="228.30" y2="795.51">
+      <stop offset="0.000" stop-color="#fc0000"/>
+      <stop offset="0.500" stop-color="#fcd6d4"/>
+      <stop offset="1.000" stop-color="#fce3e2"/>
+    </linearGradient>
+    <linearGradient id="upper-front-diagonal-light-gradient" gradientUnits="userSpaceOnUse" x1="274.29" y1="772.25" x2="272.36" y2="769.91">
+      <stop offset="0.000" stop-color="#fee9e6"/>
+      <stop offset="0.333" stop-color="#fdf2f0"/>
+      <stop offset="0.667" stop-color="#fb4051"/>
+      <stop offset="1.000" stop-color="#fb263b"/>
+    </linearGradient>
+    <linearGradient id="upper-blade-reflection-gradient" gradientUnits="userSpaceOnUse" x1="657.5" y1="470.2" x2="933" y2="289.7">
+      <stop offset="0" stop-color="#ff697b"/>
+      <stop offset="0.19" stop-color="#ffb9bc"/>
+      <stop offset="0.34" stop-color="#fff9ee"/>
+      <stop offset="0.58" stop-color="#fffdf4"/>
+      <stop offset="0.79" stop-color="#fff3e9"/>
+      <stop offset="1" stop-color="#ff6e7c"/>
+    </linearGradient>
+    <linearGradient id="upper-crease-reflection-soft-edge-gradient" gradientUnits="userSpaceOnUse" x1="453.33" y1="715.55" x2="437.14" y2="661.74">
+      <stop offset="0.000" stop-color="#fc1334"/>
+      <stop offset="0.333" stop-color="#fc2349"/>
+      <stop offset="0.667" stop-color="#f92f47"/>
+      <stop offset="1.000" stop-color="#fe3f5b"/>
+    </linearGradient>
+    <linearGradient id="upper-crease-reflection-gradient" gradientUnits="userSpaceOnUse" x1="411" y1="733" x2="529" y2="635">
+      <stop offset="0" stop-color="#fb4056"/>
+      <stop offset="0.25" stop-color="#ffb7ad"/>
+      <stop offset="0.48" stop-color="#fff7e8"/>
+      <stop offset="0.65" stop-color="#fffaf0"/>
+      <stop offset="0.83" stop-color="#ffa0a2"/>
+      <stop offset="1" stop-color="#fd2a47"/>
+    </linearGradient>
+    <linearGradient id="lower-outer-silhouette-gradient" gradientUnits="userSpaceOnUse" x1="557.79" y1="1066.22" x2="552.04" y2="1039.93">
+      <stop offset="0.000" stop-color="#4e000e"/>
+      <stop offset="0.500" stop-color="#5c0114"/>
+      <stop offset="1.000" stop-color="#83001d"/>
+    </linearGradient>
+    <linearGradient id="lower-rear-recess-gradient" gradientUnits="userSpaceOnUse" x1="679.13" y1="992.96" x2="639.16" y2="954.68">
+      <stop offset="0.000" stop-color="#620217"/>
+      <stop offset="0.500" stop-color="#550418"/>
+      <stop offset="1.000" stop-color="#4b0212"/>
+    </linearGradient>
+    <linearGradient id="lower-rear-outer-rail-gradient" gradientUnits="userSpaceOnUse" x1="739.01" y1="968.43" x2="729.66" y2="920.03">
+      <stop offset="0.000" stop-color="#830217"/>
+      <stop offset="0.500" stop-color="#a4011c"/>
+      <stop offset="1.000" stop-color="#b60223"/>
+    </linearGradient>
+    <linearGradient id="lower-rear-rail-lit-face-gradient" gradientUnits="userSpaceOnUse" x1="742.95" y1="936.58" x2="736.76" y2="924.91">
+      <stop offset="0.000" stop-color="#d20227"/>
+      <stop offset="0.500" stop-color="#b40120"/>
+      <stop offset="1.000" stop-color="#a4011e"/>
+    </linearGradient>
+    <linearGradient id="lower-front-rim-gradient" gradientUnits="userSpaceOnUse" x1="528.14" y1="1073.48" x2="514.41" y2="1046.30">
+      <stop offset="0.000" stop-color="#ea022e"/>
+      <stop offset="0.500" stop-color="#d20127"/>
+      <stop offset="1.000" stop-color="#b40122"/>
+    </linearGradient>
+    <linearGradient id="lower-front-recess-gradient" gradientUnits="userSpaceOnUse" x1="522.99" y1="1046.00" x2="518.01" y2="1034.88">
+      <stop offset="0.000" stop-color="#590316"/>
+      <stop offset="0.500" stop-color="#3d0313"/>
+      <stop offset="1.000" stop-color="#29030d"/>
+    </linearGradient>
+    <linearGradient id="lower-front-recess-inner-plane-gradient" gradientUnits="userSpaceOnUse" x1="487.60" y1="1077.43" x2="469.14" y2="1045.22">
+      <stop offset="0.000" stop-color="#700219"/>
+      <stop offset="0.500" stop-color="#4b0416"/>
+      <stop offset="1.000" stop-color="#24020d"/>
+    </linearGradient>
+    <linearGradient id="lower-left-chamfer-gradient" gradientUnits="userSpaceOnUse" x1="412.47" y1="958.97" x2="405.66" y2="952.76">
+      <stop offset="0.000" stop-color="#ff1e43"/>
+      <stop offset="0.500" stop-color="#e7122f"/>
+      <stop offset="1.000" stop-color="#6e0000"/>
+    </linearGradient>
+    <linearGradient id="lower-back-edge-chamfer-gradient" gradientUnits="userSpaceOnUse" x1="570.15" y1="842.01" x2="567.98" y2="837.52">
+      <stop offset="0.000" stop-color="#f92a41"/>
+      <stop offset="0.333" stop-color="#ff2343"/>
+      <stop offset="0.667" stop-color="#b10013"/>
+      <stop offset="1.000" stop-color="#a50617"/>
+    </linearGradient>
+    <linearGradient id="lower-top-plane-gradient-0" gradientUnits="userSpaceOnUse" x1="1120.05" y1="557.08" x2="228.19" y2="1099.11">
+      <stop offset="0.000" stop-color="#ff2e3f"/>
+      <stop offset="0.250" stop-color="#fc062c"/>
+      <stop offset="0.500" stop-color="#fb0021"/>
+      <stop offset="0.750" stop-color="#fb1e3a"/>
+      <stop offset="1.000" stop-color="#fc4455"/>
+    </linearGradient>
+    <linearGradient id="lower-top-plane-gradient-1" gradientUnits="userSpaceOnUse" x1="1120.05" y1="557.08" x2="228.19" y2="1099.11">
+      <stop offset="0.000" stop-color="#f72441"/>
+      <stop offset="0.250" stop-color="#fc4d56"/>
+      <stop offset="0.500" stop-color="#fd6169"/>
+      <stop offset="0.750" stop-color="#fc1837"/>
+      <stop offset="1.000" stop-color="#fc3544"/>
+    </linearGradient>
+    <linearGradient id="lower-top-plane-gradient-blend" gradientUnits="userSpaceOnUse" x1="714.18" y1="853.11" x2="667.88" y2="776.93"><stop stop-color="#000000"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <mask id="lower-top-plane-gradient-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254"><rect width="1254" height="1254" fill="url(#lower-top-plane-gradient-blend)"/></mask>
+    <linearGradient id="lower-front-main-plane-gradient-0" gradientUnits="userSpaceOnUse" x1="619.73" y1="896.37" x2="379.02" y2="1051.25">
+      <stop offset="0.000" stop-color="#f60d30"/>
+      <stop offset="0.250" stop-color="#ee0a2e"/>
+      <stop offset="0.500" stop-color="#f00d2f"/>
+      <stop offset="0.750" stop-color="#f51132"/>
+      <stop offset="1.000" stop-color="#fa1332"/>
+    </linearGradient>
+    <linearGradient id="lower-front-main-plane-gradient-1" gradientUnits="userSpaceOnUse" x1="619.73" y1="896.37" x2="379.02" y2="1051.25">
+      <stop offset="0.000" stop-color="#e2082d"/>
+      <stop offset="0.250" stop-color="#e30a2e"/>
+      <stop offset="0.500" stop-color="#e80d2f"/>
+      <stop offset="0.750" stop-color="#f30d31"/>
+      <stop offset="1.000" stop-color="#ff0f33"/>
+    </linearGradient>
+    <linearGradient id="lower-front-main-plane-gradient-blend" gradientUnits="userSpaceOnUse" x1="540.39" y1="1005.41" x2="488.28" y2="924.43"><stop stop-color="#000000"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <mask id="lower-front-main-plane-gradient-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254"><rect width="1254" height="1254" fill="url(#lower-front-main-plane-gradient-blend)"/></mask>
+    <linearGradient id="lower-long-side-plane-gradient-0" gradientUnits="userSpaceOnUse" x1="1171.92" y1="535.47" x2="577.30" y2="987.56">
+      <stop offset="0.000" stop-color="#bb0027"/>
+      <stop offset="0.250" stop-color="#d40128"/>
+      <stop offset="0.500" stop-color="#e6042b"/>
+      <stop offset="0.750" stop-color="#dd062a"/>
+      <stop offset="1.000" stop-color="#b00324"/>
+    </linearGradient>
+    <linearGradient id="lower-long-side-plane-gradient-1" gradientUnits="userSpaceOnUse" x1="1171.92" y1="535.47" x2="577.30" y2="987.56">
+      <stop offset="0.000" stop-color="#cc0423"/>
+      <stop offset="0.250" stop-color="#d00525"/>
+      <stop offset="0.500" stop-color="#d10427"/>
+      <stop offset="0.750" stop-color="#bd0325"/>
+      <stop offset="1.000" stop-color="#980220"/>
+    </linearGradient>
+    <linearGradient id="lower-long-side-plane-gradient-blend" gradientUnits="userSpaceOnUse" x1="848.63" y1="821.47" x2="808.80" y2="769.09"><stop stop-color="#000000"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <mask id="lower-long-side-plane-gradient-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254"><rect width="1254" height="1254" fill="url(#lower-long-side-plane-gradient-blend)"/></mask>
+    <linearGradient id="lower-front-lower-facet-gradient-0" gradientUnits="userSpaceOnUse" x1="579.33" y1="993.99" x2="241.06" y2="1131.89">
+      <stop offset="0.000" stop-color="#b50324"/>
+      <stop offset="0.250" stop-color="#b60324"/>
+      <stop offset="0.500" stop-color="#b30324"/>
+      <stop offset="0.750" stop-color="#ae0224"/>
+      <stop offset="1.000" stop-color="#ab0121"/>
+    </linearGradient>
+    <linearGradient id="lower-front-lower-facet-gradient-1" gradientUnits="userSpaceOnUse" x1="579.33" y1="993.99" x2="241.06" y2="1131.89">
+      <stop offset="0.000" stop-color="#b70022"/>
+      <stop offset="0.250" stop-color="#b30123"/>
+      <stop offset="0.500" stop-color="#ac0223"/>
+      <stop offset="0.750" stop-color="#a60422"/>
+      <stop offset="1.000" stop-color="#a50621"/>
+    </linearGradient>
+    <linearGradient id="lower-front-lower-facet-gradient-blend" gradientUnits="userSpaceOnUse" x1="396.71" y1="1084.63" x2="381.22" y2="1046.61"><stop stop-color="#000000"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+    <mask id="lower-front-lower-facet-gradient-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="1254" height="1254"><rect width="1254" height="1254" fill="url(#lower-front-lower-facet-gradient-blend)"/></mask>
+    <linearGradient id="lower-shoulder-reflection-gradient" gradientUnits="userSpaceOnUse" x1="598.13" y1="863.69" x2="590.12" y2="834.91">
+      <stop offset="0.000" stop-color="#fcc1c4"/>
+      <stop offset="0.333" stop-color="#fdbec1"/>
+      <stop offset="0.667" stop-color="#fdbcbf"/>
+      <stop offset="1.000" stop-color="#fcbdbf"/>
+    </linearGradient>
+    <linearGradient id="lower-front-reflection-gradient" gradientUnits="userSpaceOnUse" x1="529.38" y1="887.10" x2="411.26" y2="967.91">
+      <stop offset="0.000" stop-color="#fddedf"/>
+      <stop offset="0.500" stop-color="#fcb5b8"/>
+      <stop offset="1.000" stop-color="#fc959a"/>
+    </linearGradient>
+    <linearGradient id="lower-front-reflection-edge-gradient" gradientUnits="userSpaceOnUse" x1="525.76" y1="920.94" x2="479.55" y2="900.19">
+      <stop offset="0.000" stop-color="#fc6473"/>
+      <stop offset="0.500" stop-color="#fd4b5c"/>
+      <stop offset="1.000" stop-color="#fd3a53"/>
+    </linearGradient>
+    <linearGradient id="lower-front-diagonal-light-gradient" gradientUnits="userSpaceOnUse" x1="360.43" y1="1052.62" x2="354.51" y2="1043.77">
+      <stop offset="0.000" stop-color="#fcffff"/>
+      <stop offset="0.333" stop-color="#fd9298"/>
+      <stop offset="0.667" stop-color="#fc263f"/>
+      <stop offset="1.000" stop-color="#fc3149"/>
+    </linearGradient>
+    <linearGradient id="lower-blade-reflection-gradient" gradientUnits="userSpaceOnUse" x1="616.2" y1="861.2" x2="761.6" y2="782.5">
+      <stop offset="0" stop-color="#ffe9df"/>
+      <stop offset="0.3" stop-color="#fff5e9"/>
+      <stop offset="0.57" stop-color="#fffdf0"/>
+      <stop offset="0.78" stop-color="#ffb3b5"/>
+      <stop offset="1" stop-color="#ff6b7e"/>
+    </linearGradient>
+    <linearGradient id="lower-crease-reflection-soft-edge-gradient" gradientUnits="userSpaceOnUse" x1="599.94" y1="975.13" x2="558.91" y2="939.36">
+      <stop offset="0.000" stop-color="#f30d32"/>
+      <stop offset="0.333" stop-color="#ee0c2c"/>
+      <stop offset="0.667" stop-color="#ff5583"/>
+      <stop offset="1.000" stop-color="#f51733"/>
+    </linearGradient>
+    <linearGradient id="lower-crease-reflection-gradient" gradientUnits="userSpaceOnUse" x1="477" y1="1025" x2="618" y2="925">
+      <stop offset="0" stop-color="#fa4760"/>
+      <stop offset="0.3" stop-color="#ffb5ac"/>
+      <stop offset="0.5" stop-color="#fff6e6"/>
+      <stop offset="0.62" stop-color="#fff8eb"/>
+      <stop offset="0.82" stop-color="#ff8592"/>
+      <stop offset="1" stop-color="#ed1f40"/>
+    </linearGradient>
+  </defs>
+  <g id="upper-element" clip-path="url(#upper-silhouette-clip)" opacity="0.994">
+    <path id="upper-outer-silhouette" d="M146 892.5 C178.6 840 220.07 787.5 256.5 735 C294.29 683.33 327.55 631.67 373 580 C500.08 505 632.14 430 760.5 355 C895.47 279.83 1020.44 204.67 1165.5 129.5 C1094.1 201.33 1017.99 273.17 943.5 345 C869.08 417.67 788.95 490.33 707.5 563 L687.7 609.2 L490.3 754.8 L463.4 794.3 L257 843.5 Z" fill="#870a23"/>
+    <path id="upper-rear-recess" d="M484 754 L512 701 L707 563 L685 605 Z" fill="url(#upper-rear-recess-gradient)"/>
+    <path id="upper-rear-outer-rail" d="M484 754 L684 605 L707 563 L687.7 609.2 L490.3 754.8 Z" fill="url(#upper-rear-outer-rail-gradient)"/>
+    <path id="upper-rear-rail-lit-face" d="M492 743 L671 611 L696 578 L684 605 Z" fill="url(#upper-rear-rail-lit-face-gradient)"/>
+    <path id="upper-aperture-inner-wall" d="M562 677 L615 619 L701 569 L653.1 604.7 L608.2 635.8 L594.3 655.4 Z" fill="url(#upper-aperture-inner-wall-gradient)"/>
+    <path id="upper-front-underside" d="M257 842.6 L512 701 L463.4 794.3 Z" fill="#7f0014"/>
+    <path id="upper-front-rim" d="M257 838 L435 780 L512 701 L460 789 Z" fill="url(#upper-front-rim-gradient)"/>
+    <path id="upper-front-rim-lower-edge" d="M257 838 L460 789 L463.4 794.3 L257 843.5 Z" fill="#710014"/>
+    <path id="upper-front-recess" d="M257 838 L512 701 L435 780 Z" fill="url(#upper-front-recess-gradient)"/>
+    <path id="upper-front-recess-inner-plane" d="M265 832 L481 732 L435 780 Z" fill="url(#upper-front-recess-inner-plane-gradient)"/>
+    <path id="upper-front-recess-seam" d="M257 838 L434.5 779 L481 732 L436.6 781 Z" fill="#250713"/>
+    <path id="upper-cap-base" d="M146 892.5 C178.6 840 220.07 787.5 256.5 735 C294.29 683.33 327.55 631.67 373 580 C500.08 505 632.14 430 760.5 355 C895.47 279.83 1020.44 204.67 1165.5 129.5 C1094.1 201.33 1017.99 273.17 943.5 345 C869.08 417.67 788.95 490.33 707.5 563 L512 701 Z" fill="#ef002b"/>
+    <path id="upper-left-chamfer" d="M146 892.5 C178.6 840 220.07 787.5 256.5 735 C294.29 683.33 327.55 631.67 373 580 L381.7 587.3 C296.5 691.5 226 795.7 146 892.5 Z" fill="url(#upper-left-chamfer-gradient)"/>
+    <path id="upper-back-edge-chamfer" d="M373 580 C500.08 505 632.14 430 760.5 355 C895.47 279.83 1020.44 204.67 1165.5 129.5 C888 283 633 434 381.7 587.3 Z" fill="url(#upper-back-edge-chamfer-gradient)"/>
+    <g id="upper-top-plane">
+      <path id="upper-top-plane-base" d="M146 892.5 C226 795.7 296.5 691.5 381.7 587.3 C633 434 888 283 1165.5 129.5 L545.5 598.2 Q520.8 663.9 500 694.8 Q393 744 281 768 Z" fill="url(#upper-top-plane-gradient-0)"/>
+      <path id="upper-top-plane-light" d="M146 892.5 C226 795.7 296.5 691.5 381.7 587.3 C633 434 888 283 1165.5 129.5 L545.5 598.2 Q520.8 663.9 500 694.8 Q393 744 281 768 Z" fill="url(#upper-top-plane-gradient-1)" mask="url(#upper-top-plane-gradient-mask)"/>
+    </g>
+    <g id="upper-front-main-plane">
+      <path id="upper-front-main-plane-base" d="M281 768 L328 717 L455.3 582.5 Q555 554 656.8 469.3 L1165.5 129.5 L545.5 598.2 Q520.8 663.9 500 694.8 Q393 744 281 768 Z" fill="url(#upper-front-main-plane-gradient-0)"/>
+      <path id="upper-front-main-plane-light" d="M281 768 L328 717 L455.3 582.5 Q555 554 656.8 469.3 L1165.5 129.5 L545.5 598.2 Q520.8 663.9 500 694.8 Q393 744 281 768 Z" fill="url(#upper-front-main-plane-gradient-1)" mask="url(#upper-front-main-plane-gradient-mask)"/>
+    </g>
+    <g id="upper-long-side-plane">
+      <path id="upper-long-side-plane-base" d="M545.5 598.2 L1165.5 129.5 C1094.1 201.33 1017.99 273.17 943.5 345 C869.08 417.67 788.95 490.33 707.5 563 L512 701 L500 694.8 Q520.8 663.9 545.5 598.2 Z" fill="url(#upper-long-side-plane-gradient-0)"/>
+      <path id="upper-long-side-plane-light" d="M545.5 598.2 L1165.5 129.5 C1094.1 201.33 1017.99 273.17 943.5 345 C869.08 417.67 788.95 490.33 707.5 563 L512 701 L500 694.8 Q520.8 663.9 545.5 598.2 Z" fill="url(#upper-long-side-plane-gradient-1)" mask="url(#upper-long-side-plane-gradient-mask)"/>
+    </g>
+    <path id="upper-side-root-facet" d="M545.5 598.2 L675 501 L576.5 655.8 L512 701 L500 694.8 Q520.8 663.9 545.5 598.2 Z" fill="url(#upper-side-root-facet-gradient)"/>
+    <path id="upper-blade-lower-bevel" d="M512 701 L707 564 C869.07 419.17 1018.49 274.33 1165.5 129.5 C1015 280 857 433 700 565 L510 700 Z" fill="#a60027"/>
+    <g id="upper-front-lower-facet">
+      <path id="upper-front-lower-facet-base" d="M146 892.5 L281 768 Q393 744 500 694.8 L512 701 C390 759.95 268 837.39 146 892.5 Z" fill="url(#upper-front-lower-facet-gradient-0)"/>
+      <path id="upper-front-lower-facet-light" d="M146 892.5 L281 768 Q393 744 500 694.8 L512 701 C390 759.95 268 837.39 146 892.5 Z" fill="url(#upper-front-lower-facet-gradient-1)" mask="url(#upper-front-lower-facet-gradient-mask)"/>
+    </g>
+    <path id="upper-front-lower-bevel" d="M146 892.5 C268 836.5 390 758.6 512 700 L512 701 C390 761 268 838.4 146 892.5 Z" fill="#ff163b"/>
+    <path id="upper-side-root-seam" d="M500 694.8 L544.2 597.7 L675 501 L546.2 599.2 L502 694.8 Z" fill="#980522"/>
+    <path id="upper-shoulder-reflection" d="M410.3 567.5 L540.7 492.2 L656.8 469.3 L535.4 543.7 L487.3 552.5 Z" fill="url(#upper-shoulder-reflection-gradient)"/>
+    <path id="upper-shoulder-reflection-bright" d="M410.3 567.5 L540.7 492.2 L487.3 552.5 Z" fill="url(#upper-shoulder-reflection-bright-gradient)"/>
+    <path id="upper-front-reflection" d="M381.7 587.3 L455.3 582.5 L328 717 Z" fill="url(#upper-front-reflection-gradient)"/>
+    <path id="upper-front-reflection-edge" d="M328 717 L441.8 585.8 L455.3 582.5 Z" fill="url(#upper-front-reflection-edge-gradient)"/>
+    <path id="upper-front-reflection-topline" d="M381.7 587.3 L455.3 582.5 L451.7 585.1 L381.7 588.6 Z" fill="#fff4ee"/>
+    <path id="upper-tip-reflection" d="M185 851 L236.3 796.2 L281 768 Z" fill="url(#upper-tip-reflection-gradient)"/>
+    <path id="upper-front-diagonal-light" d="M185 851 L327.8 718.1 L455.3 582.5 L452.9 585.9 L328.7 719.1 L281 769.7 Z" fill="url(#upper-front-diagonal-light-gradient)"/>
+    <path id="upper-shoulder-lightline" d="M410.3 567.5 L535.4 543.7 L656.8 469.3 L535.9 546.2 Z" fill="#ffd6d0"/>
+    <path id="upper-blade-reflection" d="M657.5 470.2 L785.2 384.1 L933 289.7 L785.2 392.7 Z" fill="url(#upper-blade-reflection-gradient)"/>
+    <path id="upper-blade-reflection-underedge" d="M657.5 470.2 L785.2 392.7 L933 289.7 L785.7 394.2 Z" fill="#ff8d97"/>
+    <path id="upper-upper-ridge-hairline" d="M535.9 546.2 L656.8 469.3 L1165.5 129.5 L657.7 470.9 Z" fill="#ff6377"/>
+    <path id="upper-crease-reflection-soft-edge" d="M352 748 Q462 707 494.3 684.6 Q516 653 545.5 598.2 Q518 658 502 696.7 Q428 727 352 748 Z" fill="url(#upper-crease-reflection-soft-edge-gradient)"/>
+    <path id="upper-crease-reflection" d="M411 733 L492 689 Q500 681 511 663 L529 635 Q517 662 498 694 Q454 717 411 733 Z" fill="url(#upper-crease-reflection-gradient)"/>
+  </g>
+  <g id="lower-element" clip-path="url(#lower-silhouette-clip)" opacity="0.994">
+    <path id="lower-outer-silhouette" d="M232 1152.5 C261.28 1107 308.02 1061.5 345.5 1016 C387.93 970.5 424.66 925 476.5 879.5 C600.69 819 730.84 758.5 843.5 698 C964.44 637.5 1054.96 577 1182.5 516.5 C1129.66 576 1062.35 635.5 997.5 695 C933.09 754 862.68 813 790 872 Q775 908 754.3 936.9 L574.8 1045.1 L540.1 1077.4 L340 1117.3 Z" fill="url(#lower-outer-silhouette-gradient)"/>
+    <path id="lower-rear-recess" d="M568 1045 L590 1003.5 L790 874 L751 932 Z" fill="url(#lower-rear-recess-gradient)"/>
+    <path id="lower-rear-outer-rail" d="M568 1045 L751 932 L790 874 Q775 908 754.3 936.9 L574.8 1045.1 Z" fill="url(#lower-rear-outer-rail-gradient)"/>
+    <path id="lower-rear-rail-lit-face" d="M582 1032 L738 933 L777 895 L751 932 Z" fill="url(#lower-rear-rail-lit-face-gradient)"/>
+    <path id="lower-aperture-inner-wall" d="M628 989 L681 945 L784 881 L735.1 912.1 L671.6 955.8 L658.2 972.4 Z" fill="#830118"/>
+    <path id="lower-front-underside" d="M340 1117.3 L590 1003.5 L540.1 1077.4 Z" fill="#65071b"/>
+    <path id="lower-front-rim" d="M340 1111 L519 1065 L590 1003.5 L538 1072 Z" fill="url(#lower-front-rim-gradient)"/>
+    <path id="lower-front-rim-lower-edge" d="M340 1111 L538 1072 L540.1 1077.4 L340 1117.3 Z" fill="#750015"/>
+    <path id="lower-front-recess" d="M340 1111 L590 1003.5 L519 1065 Z" fill="url(#lower-front-recess-gradient)"/>
+    <path id="lower-front-recess-inner-plane" d="M348 1105 L560 1033 L519 1065 Z" fill="url(#lower-front-recess-inner-plane-gradient)"/>
+    <path id="lower-front-recess-seam" d="M340 1111 L518.3 1063.4 L560 1033 L519.7 1065.8 Z" fill="#260613"/>
+    <path id="lower-cap-base" d="M232 1152.5 C261.28 1107 308.02 1061.5 345.5 1016 C387.93 970.5 424.66 925 476.5 879.5 C600.69 819 730.84 758.5 843.5 698 C964.44 637.5 1054.96 577 1182.5 516.5 C1129.66 576 1062.35 635.5 997.5 695 C933.09 754 862.68 813 790 872 L590 1003.5 Z" fill="#ef002c"/>
+    <path id="lower-left-chamfer" d="M232 1152.5 C261.28 1107 308.02 1061.5 345.5 1016 C387.93 970.5 424.66 925 476.5 879.5 L483 886.3 C388.4 977 309 1068 232 1152.5 Z" fill="url(#lower-left-chamfer-gradient)"/>
+    <path id="lower-back-edge-chamfer" d="M476.5 879.5 C600.69 819 730.84 758.5 843.5 698 C964.44 637.5 1054.96 577 1182.5 516.5 C950 642 744 763 483 886.3 Z" fill="url(#lower-back-edge-chamfer-gradient)"/>
+    <g id="lower-top-plane">
+      <path id="lower-top-plane-base" d="M232 1152.5 C309 1068 388.4 977 483 886.3 C744 763 950 642 1182.5 516.5 L629.6 901.7 Q604.1 966.2 579.3 999 Q477 1033 366.3 1049.9 Z" fill="url(#lower-top-plane-gradient-0)"/>
+      <path id="lower-top-plane-light" d="M232 1152.5 C309 1068 388.4 977 483 886.3 C744 763 950 642 1182.5 516.5 L629.6 901.7 Q604.1 966.2 579.3 999 Q477 1033 366.3 1049.9 Z" fill="url(#lower-top-plane-gradient-1)" mask="url(#lower-top-plane-gradient-mask)"/>
+    </g>
+    <g id="lower-front-main-plane">
+      <path id="lower-front-main-plane-base" d="M366.3 1049.9 L418.6 995.6 L548.3 883.9 L629.6 901.7 Q604.1 966.2 579.3 999 Q477 1033 366.3 1049.9 Z" fill="url(#lower-front-main-plane-gradient-0)"/>
+      <path id="lower-front-main-plane-light" d="M366.3 1049.9 L418.6 995.6 L548.3 883.9 L629.6 901.7 Q604.1 966.2 579.3 999 Q477 1033 366.3 1049.9 Z" fill="url(#lower-front-main-plane-gradient-1)" mask="url(#lower-front-main-plane-gradient-mask)"/>
+    </g>
+    <g id="lower-long-side-plane">
+      <path id="lower-long-side-plane-base" d="M629.6 901.7 L1182.5 516.5 C1129.66 576 1062.35 635.5 997.5 695 C933.09 754 862.68 813 790 872 L590 1003.5 L579.3 999 Q604.1 966.2 629.6 901.7 Z" fill="url(#lower-long-side-plane-gradient-0)"/>
+      <path id="lower-long-side-plane-light" d="M629.6 901.7 L1182.5 516.5 C1129.66 576 1062.35 635.5 997.5 695 C933.09 754 862.68 813 790 872 L590 1003.5 L579.3 999 Q604.1 966.2 629.6 901.7 Z" fill="url(#lower-long-side-plane-gradient-1)" mask="url(#lower-long-side-plane-gradient-mask)"/>
+    </g>
+    <path id="lower-blade-lower-bevel" d="M590 1003.5 L790 874 C930.29 754.83 1072.03 635.67 1182.5 516.5 C1069 642 925 762 786 872 L586 1004 Z" fill="#a60028"/>
+    <g id="lower-front-lower-facet">
+      <path id="lower-front-lower-facet-base" d="M232 1152.5 L366.3 1049.9 Q477 1033 579.3 999 L590 1003.5 C470.67 1051.08 351.33 1110.42 232 1152.5 Z" fill="url(#lower-front-lower-facet-gradient-0)"/>
+      <path id="lower-front-lower-facet-light" d="M232 1152.5 L366.3 1049.9 Q477 1033 579.3 999 L590 1003.5 C470.67 1051.08 351.33 1110.42 232 1152.5 Z" fill="url(#lower-front-lower-facet-gradient-1)" mask="url(#lower-front-lower-facet-gradient-mask)"/>
+    </g>
+    <path id="lower-front-lower-bevel" d="M232 1152.5 C351.33 1109.8 470.67 1050.3 590 1002.8 L590 1004 C470.67 1052 351.33 1111.2 232 1152.5 Z" fill="#ff153b"/>
+    <path id="lower-side-root-seam" d="M579.3 999 L628.4 901.3 L734 829.2 L630.3 902.8 L581 999 Z" fill="#a40426"/>
+    <path id="lower-shoulder-reflection" d="M526.3 861.9 L580 836.4 L661.7 835.9 L616.2 861.2 Z" fill="url(#lower-shoulder-reflection-gradient)"/>
+    <path id="lower-front-reflection" d="M483 886.3 L548.3 883.9 L418.6 995.6 Z" fill="url(#lower-front-reflection-gradient)"/>
+    <path id="lower-front-reflection-edge" d="M418.6 995.6 L534.3 886.2 L548.3 883.9 Z" fill="url(#lower-front-reflection-edge-gradient)"/>
+    <path id="lower-front-reflection-topline" d="M483 886.3 L548.3 883.9 L545.5 886.2 L483 887.6 Z" fill="#ffefec"/>
+    <path id="lower-tip-reflection" d="M271.2 1116.4 L324.8 1074.1 L366.3 1049.9 Z" fill="#ffebe4"/>
+    <path id="lower-front-diagonal-light" d="M271.2 1116.4 L418.6 995.6 L548.3 883.9 L545.6 886.1 L419 996.9 L366.3 1051.5 Z" fill="url(#lower-front-diagonal-light-gradient)"/>
+    <path id="lower-shoulder-lightline" d="M526.3 861.9 L616.2 861.2 L661.7 835.9 L616.8 863.2 Z" fill="#ffe5dc"/>
+    <path id="lower-blade-reflection" d="M616.2 861.2 L691.5 817.8 L761.6 782.5 L697.2 820.5 Z" fill="url(#lower-blade-reflection-gradient)"/>
+    <path id="lower-upper-ridge-hairline" d="M548.3 883.9 L616.2 861.2 L1182.5 516.5 L617.5 863.3 Z" fill="#ff8e9d"/>
+    <path id="lower-crease-reflection-soft-edge" d="M441 1035 Q543 1007 572.1 988.6 Q599 947 629.6 901.7 Q605 955 581 1000.7 Q506 1023 441 1035 Z" fill="url(#lower-crease-reflection-soft-edge-gradient)"/>
+    <path id="lower-crease-reflection" d="M477 1025 Q543 1008 575.2 991.3 Q585 980 593 967 L618 925 Q599 966 579 998 Q529 1016 477 1025 Z" fill="url(#lower-crease-reflection-gradient)"/>
+  </g>
+</svg>

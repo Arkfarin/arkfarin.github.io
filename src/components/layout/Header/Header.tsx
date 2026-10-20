@@ -12,10 +12,13 @@ function HeaderMenu() {
   return (
     <aside ref={containerRef} className={styles.rail} aria-label={t('siteNav')}>
       <Link className={styles.brand} to="/#home" aria-label={t('homeLabel')}>
-        ARK
-        <span>
-          FARIN<span className={styles['brand-dot']}>.</span>
-        </span>
+        <img
+          className={styles['brand-logo']}
+          src={`${import.meta.env.BASE_URL}assets/logo_splash.svg`}
+          alt="ARKFARIN"
+          width={80}
+          height={80}
+        />
       </Link>
       <Navigation open={open} close={() => setOpen(false)} />
       <div className={styles['rail-bottom']}>

@@ -26,19 +26,15 @@
     border-color var(--duration-theme);
 }
 .brand {
-  display: block;
-  font-family: Display, Impact, sans-serif;
-  font-weight: 800;
-  font-size: 31px;
-  line-height: 0.88;
-  letter-spacing: -0.03em;
-  padding: 33px 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
 }
-.brand > span {
+.brand-logo {
   display: block;
-}
-.brand-dot {
-  color: var(--red);
+  width: 80px;
+  height: 80px;
 }
 .rail-bottom {
   padding: 0 8px 25px;
@@ -48,18 +44,6 @@
 }
 .menu-toggle {
   display: none;
-}
-@media (min-width: 1700px) {
-  .brand {
-    font-size: 38px;
-    padding-left: 26px;
-  }
-}
-@media (max-width: 1100px) {
-  .brand {
-    padding-left: 17px;
-    font-size: 29px;
-  }
 }
 @media (max-width: 760px) {
   .rail {
@@ -75,15 +59,12 @@
     padding: 0 clamp(12px, 3vw, 22px);
   }
   .brand {
-    font-size: 28px;
     padding: 0;
-    line-height: 1;
-    display: flex;
     width: max-content;
-    letter-spacing: -0.025em;
   }
-  .brand > span {
-    display: inline;
+  .brand-logo {
+    width: 48px;
+    height: 48px;
   }
   .rail-bottom {
     padding: 0;
@@ -119,15 +100,5 @@
   }
   .skip-link {
     left: 20px;
-  }
-}
-@media (max-width: 380px) {
-  .brand {
-    display: block;
-    font-size: 22px;
-    line-height: 0.95;
-  }
-  .brand > span {
-    display: block;
   }
 }

@@ -9,12 +9,22 @@
   font-size: 12px;
   color: var(--muted);
 }
-.footer > a:first-child {
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
   font-family: Display, Impact, sans-serif;
   font-weight: 800;
   font-size: 26px;
   letter-spacing: -0.02em;
   color: var(--fg);
+}
+.brand-logo {
+  display: block;
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
 }
 .links {
   display: flex;
@@ -50,7 +60,7 @@
     gap: var(--space-3);
     padding: 23px 0;
   }
-  .footer > a:first-child {
+  .brand {
     font-size: 24px;
   }
   .links {

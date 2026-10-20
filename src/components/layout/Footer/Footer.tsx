@@ -7,8 +7,17 @@ export function Footer({ project = false }: { project?: boolean }) {
   const { t } = useI18n();
   return (
     <footer className={styles.footer}>
-      <Link to="/#home">
-        ARKFARIN<span className={ui['accent-text']}>.</span>
+      <Link className={styles.brand} to="/#home">
+        <img
+          className={styles['brand-logo']}
+          src={`${import.meta.env.BASE_URL}assets/logo_splash.svg`}
+          alt=""
+          width={36}
+          height={36}
+        />
+        <span>
+          ARKFARIN<span className={ui['accent-text']}>.</span>
+        </span>
       </Link>
       <span>ark.farin.cc</span>
       <div className={styles.links}>
