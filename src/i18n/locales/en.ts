@@ -64,7 +64,7 @@ export const en: Messages = {
   copiedName: '{title}: copied',
   copyFailed: 'Couldn’t copy. Select this value: {value}',
   backTop: 'Back to top',
-  homeMetaTitle: 'ARKFARIN — code, ideas and a little chaos',
+  homeMetaTitle: 'Arkfarin — Python Developer & Automation Projects',
   homeMetaDescription:
     'Arkfarin — Python developer and vibe coder. Automating the boring bits, building tools and trying ideas out.',
   notFoundTitle: 'Page not found',

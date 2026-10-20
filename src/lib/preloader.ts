@@ -1,6 +1,13 @@
 // Completed work sets the target; elapsed time can only slow it down.
 export function startPreloader() {
   const overlay = document.getElementById('preloader');
+  if (document.documentElement.hasAttribute('data-prerendered')) {
+    overlay?.remove();
+    return {
+      complete: (_task: 'data' | 'fonts' | 'document' | 'page') => {},
+      reveal: () => {},
+    };
+  }
   const progress = overlay?.querySelector<HTMLElement>('.preloader-progress');
   const root = document.getElementById('root')!;
   const start = performance.now();
@@ -166,15 +173,14 @@ export function startPreloader() {
   }
   requestAnimationFrame(frame);
   return {
-    complete(task: 'data' | 'fonts' | 'document' | 'page' | 'backgrounds') {
+    complete(task: 'data' | 'fonts' | 'document' | 'page') {
       if (tasks.has(task)) return;
       tasks.add(task);
       target += {
-        data: 35,
+        data: 40,
         fonts: 15,
         document: 10,
-        page: 20,
-        backgrounds: 20,
+        page: 35,
       }[task];
     },
     reveal,

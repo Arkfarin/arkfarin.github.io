@@ -1,6 +1,8 @@
 // Runs before CSS/React to prevent a flash of the wrong theme.
 (() => {
-  document.documentElement.dataset.loading = 'true';
+  // Built pages are already readable. Never hide them while JS or data loads.
+  if (!document.documentElement.hasAttribute('data-prerendered'))
+    document.documentElement.dataset.loading = 'true';
   try {
     const language = localStorage.getItem('arkfarin-language');
     if (['ru', 'en', 'uk', 'ja', 'zh', 'ky'].includes(language))

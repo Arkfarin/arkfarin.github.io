@@ -11,6 +11,7 @@ export function NotFound() {
     t('notFoundMetaTitle'),
     t('notFoundMetaDescription'),
     '/404.html',
+    { noindex: true },
   );
   return (
     <main

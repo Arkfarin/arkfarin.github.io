@@ -28,9 +28,9 @@ src/
   main.tsx             client entry point
   entry-server.tsx     prerendering with the same components
 public/
-  assets/              favicon, fonts and licenses
+  assets/              favicon, social image, fonts and licenses
   theme-init.js        theme and language selection before the first paint
-  preloader.css        loading screen shown before React starts
+  preloader.css        loading screen for development without a snapshot
 scripts/               prerendering with Gist and GitHub data
 ```
 
@@ -55,12 +55,19 @@ npm run preview
 ```
 
 The build runs TypeScript checking, the Vite client build, a temporary server build
-and prerendering with **the same React components**. It produces `dist/index.html`,
+and static prerendering with **the same React components**. It produces `dist/index.html`,
 `dist/projects/index.html`, `dist/projects/<slug>/index.html`, `dist/404.html` and
-assets. The temporary `.ssr/` directory is removed. Hosting does not require Node.js.
-Content is available in the HTML without JavaScript. In the browser, the client
-fetches fresh data and replaces the build snapshot once loading finishes. If the
-Gist is unavailable, the snapshot remains visible with an error message and a retry button.
+assets, `sitemap.xml`, `robots.txt` and `llms.txt`. The temporary `.ssr/` directory
+is removed. Hosting does not require Node.js. The final build step checks the
+generated HTML, links, metadata, structured data, README snapshots and OG image.
+Run these checks separately with `npm run check:seo`.
+
+Content, including project READMEs, is visible in HTML without JavaScript.
+The client hydrates this snapshot immediately, then refreshes the Gist and the
+open project's README in the background. If the Gist is unavailable, the snapshot
+remains visible with an error message and a retry button. A failed README refresh
+keeps its last successful content. A missing or empty README during the build
+fails the build, preventing publication of an incomplete project page.
 
 `dist/` is generated output: do not edit it or commit it to Git.
 
@@ -135,7 +142,7 @@ prevent opening links or copying values.
 
 The home page shows the first **two** projects. If there are more, a More projects
 link appears below the cards. The **Projects** page (`/projects/`) shows all entries.
-Adding a project only requires updating the Gist; client routes and cards are
+Projects are defined in the Gist; client routes and cards are
 created from the data. READMEs are fetched using `repository` and `branch`, while
 `readme_blob_sha` forms part of the cache key. `category` and `language` are optional.
 
@@ -143,30 +150,21 @@ A new route needs a rebuild to receive its own static HTML on hosts without an S
 fallback. GitHub Pages serves `404.html` for routes not included in the build.
 Once JavaScript loads, the client can display the project from the Gist, but the
 HTTP status remains 404.
+After changing the Gist, run the **Deploy to GitHub Pages** workflow manually on
+`main` (or push a site change) to update static pages and the sitemap together.
 
 The footer also includes MyNickname and Farin Works. These fixed links live in
 `src/data/navigation.ts` and open in a new tab.
 
 ## Preloader
 
-Before the application starts, a gray `ARKFARIN` wordmark appears against the
-selected theme. A percentage below it follows the same progress as the red fill.
-Progress reflects completed tasks: Gist data (35%), fonts (15%), the initial
-document load (10%), page rendering (20%, including the README on direct project
-visits) and background images (20%). All unique `background` URLs from projects
-and both link lists load in parallel; the preloader waits for image loading and
-decoding. Duplicate URLs count once. If there are no backgrounds, this stage
-finishes immediately. An error or a **15-second** timeout ends the wait for an
-individual image so the site remains accessible.
+Production HTML carries `data-prerendered`: its content is immediately visible,
+even if the application script or external requests fail. Production pages skip
+the blocking preloader. Background images load normally and never gate page access.
 
-When response sizes are unknown, progress advances by completed stages rather than
-estimated bytes. The fill takes at least **500 ms**, even with cached resources.
-At 100%, the percentage fades out. On the home page, the wordmark moves into the
-hero while the page appears; direct project visits and deep links use a fade.
-With reduced motion enabled, the page is revealed without animation; the 500 ms
-minimum remains. Data and README errors end the loading wait and appear in the UI
-with retry controls. Without JavaScript, the preloader is hidden and static HTML
-remains available.
+The animated wordmark remains for development pages without a build snapshot.
+Progress follows Gist data (40%), fonts (15%), document loading (10%) and rendering
+(35%), with a 500 ms minimum. Reduced motion skips the exit animation.
 
 ## Markdown and images
 
@@ -200,9 +198,8 @@ page metadata and screen reader labels. Gist data and project READMEs retain
 their original text. Dictionaries live in `src/i18n/locales/`; TypeScript checks
 that all six languages use the same set of keys.
 
-The hero's red band, wordmark and introductory text animate as the preloader
-reveals the page. Sections also animate into view on scroll, and interactive
-elements respond to hover.
+Sections move into place on scroll while their text remains visible, and
+interactive elements respond to hover.
 
 Colors, dimensions, spacing, radii, durations and z-index values live in
 `src/styles/tokens.css`. The `<html>` attribute `data-theme="light|dark"` selects
@@ -230,6 +227,33 @@ npm run format:check
 
 ## Static hosting
 
+SEO settings live in `src/lib/seo.ts`. The build and browser share titles,
+descriptions, canonical URLs, robots directives, Open Graph, Twitter Cards and
+JSON-LD (`WebSite`, `Person`, `ProfilePage`, project information and breadcrumbs).
+The 404 page has `noindex`; valid client routes reset it. English is the indexed
+default; language preferences do not create separate localized URLs or `hreflang`.
+
+The shared social image is `public/assets/og-card.png` (1200 × 630). Its editable
+source is `scripts/og-card.html`, using the existing local fonts and logo.
+To regenerate it with Playwright installed:
+
+```bash
+npx playwright screenshot --viewport-size="1200,630" --wait-for-timeout=1000 \
+  "file://$(pwd)/scripts/og-card.html" public/assets/og-card.png
+```
+
+`robots.txt` allows all crawlers and advertises the generated sitemap. `llms.txt`
+is an optional human-readable index of the site's actual pages; it is not a
+requirement for AI search inclusion. Every crawler receives the same content.
+Google's [AI search guidance](https://developers.google.com/search/docs/appearance/ai-features)
+and [Yandex's rendering documentation](https://yandex.ru/support/webmaster/ru/yandex-indexing/rendering)
+both make accessible page content the practical foundation.
+
+`SITE_URL` sets the canonical HTTPS origin (default `https://ark.farin.cc`).
+It is shared by the static and browser builds, sitemap, robots and structured
+data. If the domain changes, also update the visible domain in the OG source
+and regenerate the image.
+
 Publish the contents of `dist/`. Known routes already have their own `index.html`,
 so direct links and page reloads work on a regular file server. Configure unknown
 URLs to serve `404.html` with a 404 status. Hosts with an SPA fallback are also
@@ -240,10 +264,11 @@ Use `base: '/'` for `arkfarin.github.io` and `ark.farin.cc`. For a subdirectory,
 build with a setting such as `SITE_BASE=/portfolio/ npm run build`. The path must
 start and end with `/`; a relative `./` base is not supported.
 
-The [GitHub Pages workflow](.github/workflows/pages.yml) runs on pushes to `main`
-and pull requests targeting `main`. It installs dependencies with `npm ci` on
-Node.js 24 and runs `npm run build`. Pushes publish `dist/` to GitHub Pages;
-pull requests build the site without publishing. There are no test steps.
+The [GitHub Pages workflow](.github/workflows/pages.yml) runs on pushes to `main`,
+pull requests targeting `main`, and manual dispatch. It installs dependencies
+with `npm ci` on Node.js 24 and runs `npm run build`, including the SEO regression
+checks. Pushes and manual runs on `main` publish `dist/` to GitHub Pages;
+pull requests build the site without publishing.
 
 In the repository, set **Settings → Pages → Build and deployment → Source** to
 **GitHub Actions**. The `github-pages` environment must allow deployment from
@@ -251,3 +276,9 @@ In the repository, set **Settings → Pages → Build and deployment → Source*
 DNS. See [Vite's static deployment guide](https://vite.dev/guide/static-deploy.html)
 and [GitHub's Pages workflow documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
 Local npm commands do not publish the site or change remote hosting settings.
+
+After publication, verify HTTPS, redirects to the canonical hostname, HTTP 200
+on real pages and HTTP 404 on missing URLs. Submit `/sitemap.xml` in Google Search
+Console and Yandex Webmaster, inspect the rendered HTML and test social previews.
+For a subdirectory deployment, the host still needs a robots.txt at the origin
+root pointing to that subdirectory's sitemap.

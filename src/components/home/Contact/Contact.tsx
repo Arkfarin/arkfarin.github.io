@@ -62,9 +62,7 @@ export function Contact() {
         {secondaryContacts.length > 0 && (
           <SocialLinks links={secondaryContacts} />
         )}
-        {data.links.contacts.length === 0 && (
-          <p>{t('emptyContacts')}</p>
-        )}
+        {data.links.contacts.length === 0 && <p>{t('emptyContacts')}</p>}
       </div>
       <Footer />
     </section>

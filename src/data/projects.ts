@@ -8,27 +8,67 @@ interface MarkdownResult {
   error: boolean;
 }
 const pending = new Map<string, Promise<MarkdownResult>>();
-const key = (project: Project) =>
+const refreshed = new Map<string, Promise<MarkdownResult>>();
+const snapshots = new Map<string, string>();
+export const markdownKey = (project: Project) =>
   `${markdownPath(project)}:${project.readme_blob_sha}`;
 
-export function loadMarkdown(project: Project): Promise<MarkdownResult> {
-  let promise = pending.get(key(project));
-  if (!promise) {
-    promise = fetch(markdownPath(project), {
-      signal: AbortSignal.timeout(15_000),
-      cache: 'no-cache',
+export function seedMarkdown(projects: Project[], value: unknown) {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return;
+  const sources = value as Record<string, unknown>;
+  for (const project of projects) {
+    const key = markdownKey(project);
+    const source = Object.hasOwn(sources, key) ? sources[key] : undefined;
+    if (typeof source !== 'string' || !source.trim()) continue;
+    snapshots.set(markdownPath(project), source);
+    pending.set(key, Promise.resolve({ source, error: false }));
+  }
+}
+
+function fetchMarkdown(project: Project): Promise<MarkdownResult> {
+  const url = markdownPath(project);
+  return fetch(url, {
+    signal: AbortSignal.timeout(15_000),
+    cache: 'no-cache',
+  })
+    .then(async (response) => {
+      if (!response.ok) throw new Error(`README: HTTP ${response.status}`);
+      const source = await response.text();
+      if (!source.trim()) throw new Error('README is empty');
+      snapshots.set(url, source);
+      return { source, error: false };
     })
-      .then(async (response) => {
-        if (!response.ok) throw new Error(`README: HTTP ${response.status}`);
-        return { source: await response.text(), error: false };
-      })
-      .catch(() => ({ source: '', error: true }));
-    pending.set(key(project), promise);
+    .catch(() => {
+      const source = snapshots.get(url);
+      return { source: source ?? '', error: source === undefined };
+    });
+}
+
+export function loadMarkdown(project: Project): Promise<MarkdownResult> {
+  const key = markdownKey(project);
+  let promise = pending.get(key);
+  if (!promise) {
+    promise = fetchMarkdown(project);
+    pending.set(key, promise);
+    refreshed.set(key, promise);
+  }
+  return promise;
+}
+
+export function refreshMarkdown(project: Project): Promise<MarkdownResult> {
+  const key = markdownKey(project);
+  let promise = refreshed.get(key);
+  if (!promise) {
+    promise = fetchMarkdown(project).then((result) => {
+      pending.set(key, Promise.resolve(result));
+      return result;
+    });
+    refreshed.set(key, promise);
   }
   return promise;
 }
 
 export function retryMarkdown(project: Project) {
-  pending.delete(key(project));
-  return loadMarkdown(project);
+  refreshed.delete(markdownKey(project));
+  return refreshMarkdown(project);
 }

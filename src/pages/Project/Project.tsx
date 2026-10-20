@@ -1,7 +1,12 @@
 import { useI18n } from '@/hooks/useI18n';
-import { use, useMemo, useState, useTransition } from 'react';
+import { use, useEffect, useMemo, useState, useTransition } from 'react';
 import { Link, useParams } from 'react-router';
-import { projectPath, loadMarkdown, retryMarkdown } from '@/data/projects';
+import {
+  projectPath,
+  loadMarkdown,
+  refreshMarkdown,
+  retryMarkdown,
+} from '@/data/projects';
 import { useSiteData } from '@/data/site';
 import type { Project as ProjectData } from '@/types/project';
 import { MarkdownRenderer } from '@/components/projects/MarkdownRenderer/MarkdownRenderer';
@@ -22,6 +27,16 @@ function ProjectContent({ project }: { project: ProjectData }) {
   const [resource, setResource] = useState(() => loadMarkdown(project));
   const [retrying, startTransition] = useTransition();
   const { source, error } = use(resource);
+  useEffect(() => {
+    let active = true;
+    void refreshMarkdown(project).then((result) => {
+      if (active && !result.error && result.source !== source)
+        startTransition(() => setResource(Promise.resolve(result)));
+    });
+    return () => {
+      active = false;
+    };
+  }, [project, source]);
   const markdown = useMemo(
     () => omitRepeatedTitle(source, project.title),
     [source, project.title],
@@ -36,7 +51,7 @@ function ProjectContent({ project }: { project: ProjectData }) {
     t('projectMetaTitle', { title: project.title }),
     project.description,
     projectPath(project.slug),
-    'article',
+    { type: 'article' },
   );
   return (
     <main

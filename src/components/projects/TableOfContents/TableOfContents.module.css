@@ -5,17 +5,26 @@
   font-size: 12px;
   color: var(--muted);
 }
-.readme-toc details {
+.readme-toc details,
+.toc-desktop {
   border-bottom: 1px solid var(--line);
   padding-bottom: 20px;
 }
-.readme-toc summary {
+.readme-toc summary,
+.toc-desktop > p {
   list-style: none;
   font-weight: 700;
   color: var(--fg);
   font-size: 13px;
   cursor: pointer;
   padding-bottom: 17px;
+}
+.toc-desktop > p {
+  margin: 0;
+  cursor: default;
+}
+.toc-mobile {
+  display: none;
 }
 .readme-toc summary::-webkit-details-marker {
   display: none;
@@ -66,6 +75,12 @@
   color: var(--fg);
 }
 @media (max-width: 1020px) {
+  .toc-desktop {
+    display: none;
+  }
+  .toc-mobile {
+    display: block;
+  }
   .readme-toc {
     grid-row: 1;
     position: static;

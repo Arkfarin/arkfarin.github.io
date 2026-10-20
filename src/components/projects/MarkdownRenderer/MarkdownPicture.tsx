@@ -43,7 +43,9 @@ export function MarkdownPicture({ node, project, children, ...props }: Props) {
             )}
             alt={alt}
             width={Number(fallback.properties.width) || undefined}
-            loading="lazy"
+            height={Number(fallback.properties.height) || undefined}
+            loading="eager"
+            fetchPriority="high"
             decoding="async"
           />
         ))}

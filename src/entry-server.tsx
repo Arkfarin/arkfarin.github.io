@@ -1,48 +1,33 @@
-import { Writable } from 'node:stream';
-import { renderToPipeableStream } from 'react-dom/server';
+import { prerenderToNodeStream } from 'react-dom/static';
 import { StaticRouter } from 'react-router';
 import { SiteRoutes } from './app/router';
 import { SiteDataContext } from './data/site';
 import type { SiteData } from './types/site';
-export { loadMarkdown } from './data/projects';
+export { loadMarkdown, markdownKey } from './data/projects';
 export { fetchSiteData } from './lib/site-data';
+export { pageHead, structuredData, absoluteUrl, siteBase } from './lib/seo';
+export { en } from './i18n/locales/en';
 
-export function render(url: string, data: SiteData): Promise<string> {
-  return new Promise((resolve, reject) => {
-    let html = '';
-    const output = new Writable({
-      write(chunk, _encoding, callback) {
-        html += String(chunk);
-        callback();
+export async function render(url: string, data: SiteData): Promise<string> {
+  const errors: unknown[] = [];
+  const { prelude, postponed } = await prerenderToNodeStream(
+    <StaticRouter basename={import.meta.env.BASE_URL} location={url}>
+      <SiteDataContext value={{ data, error: false }}>
+        <SiteRoutes />
+      </SiteDataContext>
+    </StaticRouter>,
+    {
+      signal: AbortSignal.timeout(15_000),
+      // Static files must inline completed Suspense boundaries, including long READMEs.
+      progressiveChunkSize: Number.MAX_SAFE_INTEGER,
+      onError(error) {
+        errors.push(error);
       },
-    });
-    output.on('finish', () => {
-      clearTimeout(timeout);
-      resolve(html);
-    });
-    output.on('error', (error) => {
-      clearTimeout(timeout);
-      reject(error);
-    });
-    const stream = renderToPipeableStream(
-      <StaticRouter basename={import.meta.env.BASE_URL} location={url}>
-        <SiteDataContext value={{ data, error: false }}>
-          <SiteRoutes />
-        </SiteDataContext>
-      </StaticRouter>,
-      {
-        onAllReady() {
-          stream.pipe(output);
-        },
-        onError(error) {
-          clearTimeout(timeout);
-          reject(error);
-        },
-      },
-    );
-    const timeout = setTimeout(() => {
-      stream.abort();
-      reject(new Error(`Rendering timed out: ${url}`));
-    }, 15000);
-  });
+    },
+  );
+  let html = '';
+  for await (const chunk of prelude) html += String(chunk);
+  if (postponed || errors.length)
+    throw new Error(`Incomplete prerender: ${url}`, { cause: errors[0] });
+  return html;
 }
