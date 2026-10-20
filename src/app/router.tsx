@@ -1,11 +1,5 @@
 import { useI18n } from '@/hooks/useI18n';
-import {
-  lazy,
-  Suspense,
-  useCallback,
-  useLayoutEffect,
-  type ReactNode,
-} from 'react';
+import { lazy, Suspense, useLayoutEffect, type ReactNode } from 'react';
 import { matchPath, Route, Routes, useLocation } from 'react-router';
 import { App } from './App';
 import { Home } from '@/pages/Home/Home';
@@ -13,13 +7,14 @@ import { Projects } from '@/pages/Projects/Projects';
 import { NotFound } from '@/pages/NotFound/NotFound';
 import { PageBoundary } from '@/components/ui/PageBoundary/PageBoundary';
 import { usePageTransition } from '@/hooks/usePageTransition';
-import { useSiteData } from '@/data/site';
-import { loadMarkdown } from '@/data/projects';
 import styles from './App.module.css';
 const importProject = () => import('@/pages/Project/Project');
 let projectModule: ReturnType<typeof importProject> | undefined;
 const loadProject = () => (projectModule ??= importProject());
 const Project = lazy(loadProject);
+async function prepare(pathname: string) {
+  if (matchPath('/projects/:slug', pathname)) await loadProject();
+}
 function Ready({
   children,
   onReady,
@@ -35,21 +30,6 @@ function Ready({
 }
 export function SiteRoutes({ onReady }: { onReady?: () => void }) {
   const { t } = useI18n();
-  const { data } = useSiteData();
-  const prepare = useCallback(
-    async (pathname: string) => {
-      const match = matchPath('/projects/:slug', pathname);
-      if (!match) return;
-      const project = data.projects.find(
-        ({ slug }) => slug === match.params.slug,
-      );
-      await Promise.allSettled([
-        loadProject(),
-        ...(project ? [loadMarkdown(project)] : []),
-      ]);
-    },
-    [data.projects],
-  );
   const { location, onReady: pageReady } = usePageTransition(prepare, onReady);
   return (
     <Routes location={location}>

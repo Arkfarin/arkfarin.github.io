@@ -48,7 +48,7 @@ export function usePageTransition(
       if (animate) {
         html.dataset.routeTransition = 'preparing';
         content.setAttribute('aria-busy', 'true');
-        // README and the lazy renderer load while the previous page stays usable.
+        // Load the destination module while the previous page stays usable.
         await prepare(destination.pathname);
         if (cancelled) return;
         html.dataset.routeTransition = 'leaving';

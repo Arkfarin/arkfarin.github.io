@@ -2,8 +2,6 @@ import { readFile, writeFile, mkdir, rm, readdir } from 'node:fs/promises';
 import {
   render,
   fetchSiteData,
-  loadMarkdown,
-  markdownKey,
   pageHead,
   structuredData,
   absoluteUrl,
@@ -19,18 +17,6 @@ const escape = (value) =>
     .replaceAll('>', '&gt;');
 const json = (value) => JSON.stringify(value).replaceAll('<', '\\u003c');
 const data = await fetchSiteData();
-const readmes = Object.fromEntries(
-  await Promise.all(
-    data.projects.map(async (project) => {
-      const { source, error } = await loadMarkdown(project);
-      if (error || !source.trim())
-        throw new Error(
-          `README unavailable for ${project.slug}; refusing to publish an incomplete page.`,
-        );
-      return [markdownKey(project), source];
-    }),
-  ),
-);
 const template = await readFile('dist/index.html', 'utf8');
 const headMarker = /<!-- seo-head:start -->[\s\S]*?<!-- seo-head:end -->/;
 if (!headMarker.test(template))
@@ -88,13 +74,12 @@ for (const page of pages) {
   ].join('\n');
   const content = await render(`${siteBase}${page.path}`, data);
   let html = template
-    .replace('<html ', '<html data-prerendered ')
     .replace(headMarker, () => metadata)
     .replace('<div id="root"></div>', () => `<div id="root">${content}</div>`)
     .replace(
       '</body>',
       () =>
-        `<script type="application/json" id="site-data">${json(data)}</script><script type="application/json" id="project-readmes">${json(readmes)}</script></body>`,
+        `<script type="application/json" id="site-data">${json(data)}</script></body>`,
     );
   if (page.project)
     html = html.replace(
@@ -126,7 +111,7 @@ await writeFile(
 const markdownText = (text) => text.replace(/[\\[\]<>\r\n]/g, ' ');
 await writeFile(
   'dist/llms.txt',
-  `# Arkfarin\n\n> Python developer. Tools, automation and projects.\n\n## Website\n\n- [About Arkfarin](${absoluteUrl()}): Developer profile and contact links.\n- [Projects](${absoluteUrl('projects/')}): The full project catalog.\n\n## Projects\n\n${data.projects.map((project) => `- [${markdownText(project.title)}](${absoluteUrl(`projects/${project.slug}/`)}): ${markdownText(project.description)}`).join('\n')}\n\nProject pages include their README in the initial HTML. English is the default content language; the language selector translates the interface.\n`,
+  `# Arkfarin\n\n> Python developer. Tools, automation and projects.\n\n## Website\n\n- [About Arkfarin](${absoluteUrl()}): Developer profile and contact links.\n- [Projects](${absoluteUrl('projects/')}): The full project catalog.\n\n## Projects\n\n${data.projects.map((project) => `- [${markdownText(project.title)}](${absoluteUrl(`projects/${project.slug}/`)}): ${markdownText(project.description)}`).join('\n')}\n\nProject titles, descriptions and technologies are included in the initial HTML. READMEs load when a project is opened in the browser. English is the default content language; the language selector translates the interface.\n`,
 );
 await writeFile('dist/.nojekyll', '');
 await rm('.ssr', { recursive: true });

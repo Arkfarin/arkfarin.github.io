@@ -30,8 +30,8 @@ src/
 public/
   assets/              favicon, social image, fonts and licenses
   theme-init.js        theme and language selection before the first paint
-  preloader.css        loading screen for development without a snapshot
-scripts/               prerendering with Gist and GitHub data
+  preloader.css        animated loading screen
+scripts/               prerendering with Gist data
 ```
 
 Component styles live alongside their components. `Primitives.module.css` contains
@@ -58,16 +58,19 @@ The build runs TypeScript checking, the Vite client build, a temporary server bu
 and static prerendering with **the same React components**. It produces `dist/index.html`,
 `dist/projects/index.html`, `dist/projects/<slug>/index.html`, `dist/404.html` and
 assets, `sitemap.xml`, `robots.txt` and `llms.txt`. The temporary `.ssr/` directory
-is removed. Hosting does not require Node.js. The final build step checks the
-generated HTML, links, metadata, structured data, README snapshots and OG image.
-Run these checks separately with `npm run check:seo`.
+is removed. Hosting does not require Node.js.
 
-Content, including project READMEs, is visible in HTML without JavaScript.
-The client hydrates this snapshot immediately, then refreshes the Gist and the
-open project's README in the background. If the Gist is unavailable, the snapshot
-remains visible with an error message and a retry button. A failed README refresh
-keeps its last successful content. A missing or empty README during the build
-fails the build, preventing publication of an incomplete project page.
+Home content, the project catalog, and each project's title, description,
+technologies and repository link are visible in HTML without JavaScript.
+The client hydrates this snapshot, then refreshes the Gist in the background.
+If the Gist is unavailable, the snapshot remains visible with an error message
+and a retry button.
+
+The build does not fetch READMEs or embed their source in HTML. A README is
+requested only after its project page opens in the browser; the project's header
+stays usable while it loads. Successful requests are cached for the session.
+An unavailable README shows a retry button and a GitHub source link without
+blocking the rest of the page or the site build.
 
 `dist/` is generated output: do not edit it or commit it to Git.
 
@@ -158,13 +161,17 @@ The footer also includes MyNickname and Farin Works. These fixed links live in
 
 ## Preloader
 
-Production HTML carries `data-prerendered`: its content is immediately visible,
-even if the application script or external requests fail. Production pages skip
-the blocking preloader. Background images load normally and never gate page access.
+The animated wordmark runs in both development and production. On the home page,
+it moves into the Hero while the accent band and introductory text appear.
+Other pages and deep links use a short fade.
 
-The animated wordmark remains for development pages without a build snapshot.
-Progress follows Gist data (40%), fonts (15%), document loading (10%) and rendering
-(35%), with a 500 ms minimum. Reduced motion skips the exit animation.
+The application activates the preloader after its JavaScript loads. Without
+JavaScript, or if the application bundle fails to load, the prerendered HTML
+remains visible. A 10-second fallback dismisses a stalled loader.
+Progress follows site data (40%), fonts (15%), document loading (10%) and rendering
+(35%), with a 500 ms minimum. In production, the embedded snapshot completes the
+data step immediately while the Gist refreshes in the background.
+Reduced motion skips the exit animation.
 
 ## Markdown and images
 
@@ -198,8 +205,8 @@ page metadata and screen reader labels. Gist data and project READMEs retain
 their original text. Dictionaries live in `src/i18n/locales/`; TypeScript checks
 that all six languages use the same set of keys.
 
-Sections move into place on scroll while their text remains visible, and
-interactive elements respond to hover.
+Sections fade and move into place on scroll, and interactive elements respond
+to hover. Without JavaScript, section content is visible immediately.
 
 Colors, dimensions, spacing, radii, durations and z-index values live in
 `src/styles/tokens.css`. The `<html>` attribute `data-theme="light|dark"` selects
@@ -266,8 +273,8 @@ start and end with `/`; a relative `./` base is not supported.
 
 The [GitHub Pages workflow](.github/workflows/pages.yml) runs on pushes to `main`,
 pull requests targeting `main`, and manual dispatch. It installs dependencies
-with `npm ci` on Node.js 24 and runs `npm run build`, including the SEO regression
-checks. Pushes and manual runs on `main` publish `dist/` to GitHub Pages;
+with `npm ci` on Node.js 24 and runs `npm run build`.
+Pushes and manual runs on `main` publish `dist/` to GitHub Pages;
 pull requests build the site without publishing.
 
 In the repository, set **Settings → Pages → Build and deployment → Source** to

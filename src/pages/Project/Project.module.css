@@ -89,6 +89,10 @@
 .readme-toolbar a:hover {
   color: var(--accent);
 }
+.readme-status {
+  padding: 26px;
+  color: var(--muted);
+}
 .project-page-bottom {
   display: flex;
   align-items: center;

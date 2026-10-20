@@ -3,7 +3,6 @@ import { StaticRouter } from 'react-router';
 import { SiteRoutes } from './app/router';
 import { SiteDataContext } from './data/site';
 import type { SiteData } from './types/site';
-export { loadMarkdown, markdownKey } from './data/projects';
 export { fetchSiteData } from './lib/site-data';
 export { pageHead, structuredData, absoluteUrl, siteBase } from './lib/seo';
 export { en } from './i18n/locales/en';
@@ -18,7 +17,7 @@ export async function render(url: string, data: SiteData): Promise<string> {
     </StaticRouter>,
     {
       signal: AbortSignal.timeout(15_000),
-      // Static files must inline completed Suspense boundaries, including long READMEs.
+      // Inline completed route boundaries in the static HTML.
       progressiveChunkSize: Number.MAX_SAFE_INTEGER,
       onError(error) {
         errors.push(error);

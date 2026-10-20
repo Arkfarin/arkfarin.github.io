@@ -4,7 +4,6 @@ import { BrowserRouter, matchPath } from 'react-router';
 import { SiteRoutes } from './app/router';
 import { Bootstrap } from './app/Bootstrap';
 import { parseSiteData } from './lib/site-data';
-import { seedMarkdown } from './data/projects';
 import type { SiteData } from './types/site';
 import { startPreloader, waitForDocument, waitForFonts } from './lib/preloader';
 import { initializeLanguage } from './i18n/store';
@@ -23,9 +22,6 @@ let initialData: SiteData | undefined;
 const snapshot = document.getElementById('site-data')?.textContent;
 try {
   if (snapshot) initialData = parseSiteData(snapshot);
-  const readmes = document.getElementById('project-readmes')?.textContent;
-  if (initialData && readmes)
-    seedMarkdown(initialData.projects, JSON.parse(readmes));
 } catch {
   // A damaged snapshot falls back to the normal data request.
   initialData = undefined;
@@ -52,7 +48,7 @@ if (
     window.location.pathname,
   )
 ) {
-  // A failed lazy chunk must not replace the readable static project with an error.
+  // Keep the static project details readable if the lazy chunk fails.
   void import('./pages/Project/Project')
     .then(mount)
     .catch(() => preloader.reveal());

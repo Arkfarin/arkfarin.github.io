@@ -1,13 +1,6 @@
 // Completed work sets the target; elapsed time can only slow it down.
 export function startPreloader() {
   const overlay = document.getElementById('preloader');
-  if (document.documentElement.hasAttribute('data-prerendered')) {
-    overlay?.remove();
-    return {
-      complete: (_task: 'data' | 'fonts' | 'document' | 'page') => {},
-      reveal: () => {},
-    };
-  }
   const progress = overlay?.querySelector<HTMLElement>('.preloader-progress');
   const root = document.getElementById('root')!;
   const start = performance.now();
@@ -19,7 +12,10 @@ export function startPreloader() {
   const animations: Animation[] = [];
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
   let heroWord: HTMLElement | null = null;
+  // Only hide the static HTML once the application can dismiss the loader.
+  document.documentElement.dataset.loading = 'true';
   root.inert = true;
+  const timeout = window.setTimeout(reveal, 10_000);
   function frame(now: number) {
     if (stopped) return;
     const allowed = Math.min(target, ((now - start) / 500) * 100);
@@ -162,6 +158,7 @@ export function startPreloader() {
   function reveal() {
     if (stopped) return;
     stopped = true;
+    window.clearTimeout(timeout);
     window.removeEventListener('resize', reveal);
     motion.removeEventListener('change', reveal);
     heroWord?.removeAttribute('data-preloader-target');

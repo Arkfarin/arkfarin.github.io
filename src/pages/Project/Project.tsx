@@ -1,11 +1,12 @@
 import { useI18n } from '@/hooks/useI18n';
-import { use, useEffect, useMemo, useState, useTransition } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router';
 import {
   projectPath,
   loadMarkdown,
-  refreshMarkdown,
-  retryMarkdown,
+  clearMarkdown,
+  markdownKey,
+  type MarkdownResult,
 } from '@/data/projects';
 import { useSiteData } from '@/data/site';
 import type { Project as ProjectData } from '@/types/project';
@@ -24,19 +25,22 @@ function ProjectContent({ project }: { project: ProjectData }) {
   const {
     data: { projects },
   } = useSiteData();
-  const [resource, setResource] = useState(() => loadMarkdown(project));
-  const [retrying, startTransition] = useTransition();
-  const { source, error } = use(resource);
+  const [result, setResult] = useState<MarkdownResult | null>(null);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let active = true;
-    void refreshMarkdown(project).then((result) => {
-      if (active && !result.error && result.source !== source)
-        startTransition(() => setResource(Promise.resolve(result)));
+    void loadMarkdown(project).then((result) => {
+      if (active) setResult(result);
     });
     return () => {
       active = false;
     };
-  }, [project, source]);
+  }, [project, attempt]);
+  useEffect(() => {
+    if (result && window.location.hash)
+      window.dispatchEvent(new Event('route-ready'));
+  }, [result]);
+  const { source = '', error = false } = result ?? {};
   const markdown = useMemo(
     () => omitRepeatedTitle(source, project.title),
     [source, project.title],
@@ -110,29 +114,36 @@ function ProjectContent({ project }: { project: ProjectData }) {
               {t('githubSource')} ↗
             </a>
           </div>
-          {error ? (
+          {!result ? (
+            <p className={styles['readme-status']} role="status">
+              {t('loading')}
+            </p>
+          ) : error ? (
             <div className={styles['readme-error']} role="alert">
               <p>{t('readmeError')}</p>
               <button
                 className={`${ui.button} ${ui['button-solid']}`}
                 type="button"
-                disabled={retrying}
-                onClick={() =>
-                  startTransition(() => setResource(retryMarkdown(project)))
-                }
+                onClick={() => {
+                  clearMarkdown(project);
+                  setResult(null);
+                  setAttempt((value) => value + 1);
+                }}
               >
-                {retrying ? t('loading') : t('retry')}
+                {t('retry')}
               </button>
             </div>
           ) : (
             <MarkdownRenderer markdown={markdown} project={project} />
           )}
         </section>
-        <TableOfContents
-          headings={headings}
-          project={project}
-          source={source}
-        />
+        {result && !error && (
+          <TableOfContents
+            headings={headings}
+            project={project}
+            source={source}
+          />
+        )}
       </div>
       <nav
         className={styles['project-page-bottom']}
@@ -156,7 +167,7 @@ export default function Project() {
   const { data } = useSiteData();
   const project = data.projects.find((project) => project.slug === slug);
   return project ? (
-    <ProjectContent key={project.slug} project={project} />
+    <ProjectContent key={markdownKey(project)} project={project} />
   ) : (
     <NotFound />
   );
